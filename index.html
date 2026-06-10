@@ -1132,6 +1132,17 @@ function cInit(){
   $('hdr-badge').textContent = `Generated: ${D.meta.generated}`;
   populate($('sCT'), D.opts.cts);
   buildWkFilter();
+  // Default: hide Wk1–Wk8 (indices 0-7), show Wk9 onwards
+  const total = D.meta.week_labels.length;
+  const hideFirst = 8;
+  if(total > hideFirst){
+    document.querySelectorAll('.wk-cb').forEach((cb,i)=>{ cb.checked = i >= hideFirst; });
+    $('wk-all').checked = false;
+    $('wk-all').indeterminate = true;
+    const checked = [...Array(total).keys()].filter(i => i >= hideFirst);
+    selectedWeeks = checked;
+    updateWkBtn(checked.length, total);
+  }
   buildHeader();
   onCTChange();
 })();
