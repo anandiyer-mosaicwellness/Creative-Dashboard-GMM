@@ -1108,6 +1108,10 @@ function cInit(){
   const cats = ['All', ...new Set(C.creators.map(c=>c.category))].sort((a,b)=>a==='All'?-1:b==='All'?1:a.localeCompare(b));
   populate($('cCAT'), cats);
   cBuildWkFilter();
+  // Default: YT Creator filter on
+  $('cCT_TYPE').value = 'YT Creator';
+  // Default: Hide spend below ₹500 ticked
+  $('cHIDE500').checked = true;
   // Default: hide Wk1–Wk8 (indices 0-7), show Wk9 onwards
   const total = C.meta.week_labels.length;
   const hideFirst = 8;
