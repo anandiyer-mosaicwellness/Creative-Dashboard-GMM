@@ -621,8 +621,6 @@ function buildHeader(){
   const isPeriod = selectedWeeks !== null && selectedWeeks.length < D.meta.week_labels.length;
   const spendLbl = isPeriod ? 'Period Spend ₹' : 'Total Spend ₹';
   let h = `<th onclick="setSort(-1)">Video<span></span></th>
-            <th class="scol" style="cursor:default">Creator</th>
-            <th class="scol" style="cursor:default">Product</th>
             <th class="scol" onclick="setSort(-2)">${spendLbl}<span></span></th>`;
   visIdxs.forEach(wi=>
     h+=`<th class="wcol" onclick="setSort(${wi})">${D.meta.week_labels[wi]}<br>Rank<span></span></th>`
@@ -741,9 +739,7 @@ function render(){
     const isExact = f.search && v.id.toLowerCase()===f.search;
     const fmtBadge = v.fmt==='16:9 Int' ? `<span class="fmt-badge">16:9 Int</span>` : '';
     const cr = VID_CREATOR_MAP[v.id];
-    const crCell = cr
-      ? `<span style="font-weight:700;font-size:13px;color:var(--navy)">${cr.name}</span><br><span style="font-size:11px;color:var(--muted)">${cr.category}</span>`
-      : `<span style="font-size:11px;color:var(--muted)">–</span>`;
+    const crName = cr ? cr.name : '–';
     const prod = resolveProduct(v.id, v);
     const prodStyle = getProdBadgeStyle(prod);
     return `<tr style="${isExact?'background:#FFFDE7;':''}">
@@ -751,11 +747,13 @@ function render(){
         <img class="thumb" src="${thumb}" loading="lazy" onerror="this.style.visibility='hidden'" alt="">
         <div class="vinfo">
           <span class="vid-id" title="${v.url}">${v.id}${fmtBadge}</span>
+          <span style="display:flex;align-items:center;gap:6px;margin-top:2px">
+            <span style="font-size:12px;font-weight:600;color:var(--navy)">${crName}</span>
+            <span class="vbadge" style="${prodStyle};padding:1px 7px;font-size:10px">${prod}</span>
+          </span>
           <a href="${v.url}" target="_blank" class="vid-link">▶ Open on YouTube</a>
         </div>
       </div></td>
-      <td>${crCell}</td>
-      <td><span class="vbadge" style="${prodStyle};padding:3px 8px;font-size:11px">${prod}</span></td>
       <td class="spend">${inr(v.total)}</td>
       ${rkCells}
       <td><span class="vbadge ${vd.cls}" data-tip="${vd.tip}">${vd.label}</span></td>
