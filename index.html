@@ -1567,8 +1567,10 @@ function resolveProduct(vidId, videoObj){
   const MANUAL_CREATORS = [
     { name:'Rahul Badesra', category:'Beard', creator_type:'YT Creator', inf_int:'Inf',
       ids:['LI4nXzG8br8','w8YrtQi9AKI','HP8BJYKEjTY','67QuHgHyHtc'] },
-    { name:'Rahul Badesra', category:'Beard', creator_type:'YT Creator', inf_int:'Inf',
+    { name:'Rahul Badsera', category:'Beard', creator_type:'YT Creator', inf_int:'Inf',
       ids:['EWRUfB5ZmkA','QV5LLQDCVSw'] },
+    { name:'Rishabh Jain', category:'Hair', creator_type:'YT Creator', inf_int:'Inf',
+      ids:['4I459qc1yWE','wy0SFh-5ymU','HhEPmOEeQWk'] },
   ];
   const dMap={};
   D.videos.forEach(v=>{ dMap[v.id]=v; });
@@ -1626,9 +1628,13 @@ const VID_PRODUCT_MANUAL = {
   'w8YrtQi9AKI': 'BGK',
   'HP8BJYKEjTY': 'BGK',
   '67QuHgHyHtc': 'BGK',
-  // BQ–BX section — Rahul Badesra
+  // BQ–BX section — Rahul Badsera
   'EWRUfB5ZmkA': 'BGK',
   'QV5LLQDCVSw': 'BGK',
+  // Rishabh Jain — Hair S2 Kit
+  '4I459qc1yWE': 'S2 Kit',
+  'wy0SFh-5ymU': 'S2 Kit',
+  'HhEPmOEeQWk': 'S2 Kit',
 };
 
 // Override map: videos whose ad-group-derived product is generic get the creator's dominant product
