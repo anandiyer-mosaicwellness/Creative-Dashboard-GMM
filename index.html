@@ -1034,6 +1034,7 @@ function onCampStatusChange(){
 }
 document.addEventListener('click',function(e){
   if(!e.target.closest('#camp-wrap')){const dd=$('camp-dd');if(dd)dd.style.display='none';const btn=$('camp-btn');if(btn){const cbs=[...document.querySelectorAll('.camp-cb')];const n=cbs.filter(cb=>cb.checked).length;btn.classList.toggle('on',n>0&&n<cbs.length);}}
+  if(!e.target.closest('#pc-wk-wrap')){const dd=$('pc-wk-dd');if(dd)dd.style.display='none';}
   if(!e.target.closest('#wk-wrap')){const dd=$('wk-dd');if(dd)dd.style.display='none';}
 });
 
@@ -3831,22 +3832,63 @@ function iaRender(){
 let pcInitDone=false;
 function pcInit(){
   if(pcInitDone) return; pcInitDone=true;
-  const sel=$('pc-wk'); sel.innerHTML='';
   const wks=D.meta.week_labels; const n=wks.length;
-  const add=(v,t)=>{ const o=document.createElement('option'); o.value=v; o.textContent=t; sel.appendChild(o); };
-  add('all','All Weeks');
-  add('last4','Last 4 Weeks');
-  add('last8','Last 8 Weeks');
-  for(let i=n-1;i>=0;i--) add(i, wks[i]);
-  sel.value='all';
+  const list=$('pc-wk-list'); list.innerHTML='';
+  for(let i=n-1;i>=0;i--){
+    const row=document.createElement('label');
+    row.style.cssText='display:flex;align-items:center;gap:8px;padding:5px 12px;cursor:pointer;font-size:12px;color:var(--navy)';
+    row.innerHTML=`<input type="checkbox" class="pc-wk-cb" data-wi="${i}" onchange="onPcWkChange()" checked style="width:13px;height:13px;accent-color:var(--blue);flex-shrink:0"> ${wks[i]}`;
+    list.appendChild(row);
+  }
+  updatePcWkBtn();
   pcRender();
 }
+function togglePcWkDD(e){
+  e.stopPropagation();
+  const dd=$('pc-wk-dd'); dd.style.display=dd.style.display==='block'?'none':'block';
+}
+function setPcWkPreset(preset){
+  const wks=D.meta.week_labels; const n=wks.length;
+  const cbs=[...document.querySelectorAll('.pc-wk-cb')];
+  if(preset==='all'){ cbs.forEach(c=>c.checked=true); }
+  else if(preset==='last4'){ const t=Math.min(4,n); cbs.forEach(c=>{ c.checked=parseInt(c.dataset.wi)>=n-t; }); }
+  else if(preset==='last8'){ const t=Math.min(8,n); cbs.forEach(c=>{ c.checked=parseInt(c.dataset.wi)>=n-t; }); }
+  // highlight active preset btn
+  ['all','last4','last8'].forEach(p=>{
+    const b=$('pcwk-pre-'+p);
+    const on=p===preset;
+    b.style.background=on?'#EBF3FF':'var(--white)';
+    b.style.borderColor=on?'var(--blue)':'var(--border)';
+    b.style.color=on?'var(--blue)':'var(--navy)';
+    b.style.fontWeight=on?'600':'400';
+  });
+  updatePcWkBtn(); pcRender();
+}
+function onPcWkChange(){
+  // clear preset highlights when manually picking weeks
+  ['all','last4','last8'].forEach(p=>{
+    const b=$('pcwk-pre-'+p);
+    b.style.background='var(--white)'; b.style.borderColor='var(--border)';
+    b.style.color='var(--navy)'; b.style.fontWeight='400';
+  });
+  updatePcWkBtn(); pcRender();
+}
+function updatePcWkBtn(){
+  const cbs=[...document.querySelectorAll('.pc-wk-cb')];
+  const checked=cbs.filter(c=>c.checked);
+  const btn=$('pc-wk-btn');
+  if(!btn) return;
+  if(checked.length===0) btn.textContent='No weeks';
+  else if(checked.length===cbs.length) btn.textContent='All Weeks';
+  else if(checked.length===1) btn.textContent=D.meta.week_labels[parseInt(checked[0].dataset.wi)];
+  else btn.textContent=checked.length+' weeks selected';
+  btn.classList.toggle('on', checked.length>0 && checked.length<cbs.length);
+}
 function pcWkIndices(){
-  const v=$('pc-wk').value; const n=D.meta.week_labels.length;
-  if(v==='all') return Array.from({length:n},(_,i)=>i);
-  if(v==='last4') return Array.from({length:Math.min(4,n)},(_,i)=>n-Math.min(4,n)+i);
-  if(v==='last8') return Array.from({length:Math.min(8,n)},(_,i)=>n-Math.min(8,n)+i);
-  return [parseInt(v)];
+  const cbs=[...document.querySelectorAll('.pc-wk-cb')];
+  if(!cbs.length){ const n=D.meta.week_labels.length; return Array.from({length:n},(_,i)=>i); }
+  const checked=cbs.filter(c=>c.checked).map(c=>parseInt(c.dataset.wi));
+  return checked.length ? checked.sort((a,b)=>a-b) : Array.from({length:D.meta.week_labels.length},(_,i)=>i);
 }
 function pcRender(){
   const idxs=pcWkIndices(); const catF=$('pc-cat').value;
@@ -3944,7 +3986,7 @@ function pcRender(){
   function fmtCard(fmt, label, elId){
     const allVids=D.videos.filter(v=>{ const fmtOk=fmt==='9:16 (Others)'?(v.fmt||'')==='Others'||(v.fmt||'')==='':v.fmt===fmt; if(!fmtOk) return false; if(catF==='All') return true; const m={}; v.combos.forEach(c=>{const sp=c.w.reduce((s,x)=>s+x,0);m[c.cat]=(m[c.cat]||0)+sp;}); const vc=Object.entries(m).sort((a,b)=>b[1]-a[1])[0]?.[0]||'Other'; return vc===catF; });
     const total=allVids.length;
-    const active=allVids.filter(v=>idxs.reduce((s,wi)=>s+v.combos.reduce((c2,c)=>c2+(c.w[wi]||0),0),0)>1000).length;
+    const active=allVids.filter(v=>idxs.reduce((s,wi)=>s+v.combos.reduce((c2,c)=>c2+(c.w[wi]||0),0),0)>=4000).length;
     const notActive=total-active;
     const actPct=total>0?Math.round(active/total*100):0;
     const totSp=allVids.reduce((s,v)=>s+idxs.reduce((s2,wi)=>s2+v.combos.reduce((c2,c)=>c2+(c.w[wi]||0),0),0),0);
@@ -3956,7 +3998,7 @@ function pcRender(){
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
         <div><div style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">Total</div><div style="font-size:24px;font-weight:700;color:var(--navy)">${total.toLocaleString('en-IN')}</div></div>
-        <div><div style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">Spend &gt;₹1K</div><div style="font-size:24px;font-weight:700;color:#f97316">${active.toLocaleString('en-IN')}</div></div>
+        <div><div style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">Avg Spends &gt;4K/Wk</div><div style="font-size:24px;font-weight:700;color:#f97316">${active.toLocaleString('en-IN')}</div></div>
         <div><div style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">Activation %</div><div style="font-size:24px;font-weight:700;color:#f97316">${actPct}%</div></div>
       </div>
       <div style="background:#e2e8f0;border-radius:4px;height:8px;margin-bottom:14px;overflow:hidden">
@@ -3980,7 +4022,7 @@ function pcRender(){
   const wowWks=Array.from({length:Math.min(5,n)},(_,i)=>n-Math.min(5,n)+i);
   const thdr=`<tr style="background:var(--bg);color:var(--muted);font-size:11px"><th style="text-align:left;padding:8px 14px;font-weight:600">Format</th>${wowWks.map(wi=>`<th style="text-align:center;padding:8px 10px;font-weight:600">${wks[wi]}</th>`).join('')}<th style="text-align:center;padding:8px 10px;font-weight:600">WoW</th></tr>`;
   function wowRow(fmt, label){
-    const counts=wowWks.map(wi=>D.videos.filter(v=>{ const fmtOk=fmt==='9:16 (Others)'?((v.fmt||'')==='Others'||(v.fmt||'')===''):v.fmt===fmt; if(!fmtOk) return false; if(catF==='All') return v.combos.reduce((s,c)=>s+(c.w[wi]||0),0)>1000; const m={}; v.combos.forEach(c=>{const sp=c.w.reduce((s,x)=>s+x,0);m[c.cat]=(m[c.cat]||0)+sp;}); const vc=Object.entries(m).sort((a,b)=>b[1]-a[1])[0]?.[0]||'Other'; return vc===catF&&v.combos.reduce((s,c)=>s+(c.w[wi]||0),0)>1000; }).length);
+    const counts=wowWks.map(wi=>D.videos.filter(v=>{ const fmtOk=fmt==='9:16 (Others)'?((v.fmt||'')==='Others'||(v.fmt||'')===''):v.fmt===fmt; if(!fmtOk) return false; if(catF==='All') return v.combos.reduce((s,c)=>s+(c.w[wi]||0),0)>1000; const m={}; v.combos.forEach(c=>{const sp=c.w.reduce((s,x)=>s+x,0);m[c.cat]=(m[c.cat]||0)+sp;}); const vc=Object.entries(m).sort((a,b)=>b[1]-a[1])[0]?.[0]||'Other'; return vc===catF&&v.combos.reduce((s,c)=>s+(c.w[wi]||0),0)>=4000; }).length);
     const last=counts[counts.length-1]||0, prev=counts[counts.length-2]||0;
     const wow=prev>0?Math.round((last-prev)/prev*100):null;
     const wowStr=wow===null?'–':(wow>=0?`<span style="color:#16a34a">+${wow}%</span>`:`<span style="color:#dc2626">${wow}%</span>`);
@@ -4336,7 +4378,18 @@ function taGenerate(idx){
 <div id="tab7" style="display:none">
 <div style="background:var(--white);border-bottom:1px solid var(--border);padding:10px 24px;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.08)">
   <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-    <div class="fg"><span class="flabel">WEEKS</span><select id="pc-wk" onchange="pcRender()" style="font-size:12px;min-width:130px"></select></div>
+    <div class="fg" style="position:relative" id="pc-wk-wrap">
+      <span class="flabel">WEEKS</span>
+      <button class="camp-btn" id="pc-wk-btn" onclick="togglePcWkDD(event)">All Weeks</button>
+      <div class="camp-dd" id="pc-wk-dd" style="min-width:200px;max-height:340px">
+        <div style="padding:8px 10px;border-bottom:1px solid var(--border);display:flex;gap:6px;flex-wrap:wrap">
+          <button onclick="setPcWkPreset('all')" id="pcwk-pre-all" style="font-size:11px;padding:3px 8px;border-radius:4px;border:1px solid var(--blue);background:#EBF3FF;color:var(--blue);cursor:pointer;font-weight:600">All</button>
+          <button onclick="setPcWkPreset('last4')" id="pcwk-pre-last4" style="font-size:11px;padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:var(--white);color:var(--navy);cursor:pointer">Last 4</button>
+          <button onclick="setPcWkPreset('last8')" id="pcwk-pre-last8" style="font-size:11px;padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:var(--white);color:var(--navy);cursor:pointer">Last 8</button>
+        </div>
+        <div id="pc-wk-list" style="padding:6px 0"></div>
+      </div>
+    </div>
     <div class="fg"><span class="flabel">CATEGORY</span><select id="pc-cat" onchange="pcRender()" style="font-size:12px;min-width:140px"><option value="All">All categories</option><option value="Hair">Hair</option><option value="Beard">Beard</option><option value="Nutrition">Nutrition</option></select></div>
   </div>
 </div>
@@ -4370,7 +4423,7 @@ function taGenerate(idx){
     </div>
   </div>
   <div style="background:var(--white);border-radius:10px;border:1px solid var(--border);overflow:hidden">
-    <div style="background:var(--navy);color:#fff;padding:8px 14px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em">Week-on-Week — Videos with Spend &gt;₹1K</div>
+    <div style="background:var(--navy);color:#fff;padding:8px 14px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em">Week-on-Week — Videos with Avg Spends &gt;4K/Wk</div>
     <div style="overflow-x:auto"><table id="pc-wow-table" style="width:100%;border-collapse:collapse;font-size:12px"></table></div>
   </div>
 </div>
