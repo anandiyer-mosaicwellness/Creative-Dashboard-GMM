@@ -1,0 +1,1277 @@
+{
+  "version": "1.0",
+  "generated": "2026-08-03",
+  "dashboard_file": "MM_YT_Dashboard 0807 V3.html",
+  "data_state": {
+    "week_count": 27,
+    "first_week": "Wk1 (23Feb-1Mar)",
+    "last_week": "Wk27 (17Aug-23Aug)",
+    "video_count": 1314,
+    "creator_count": 127,
+    "total_mapped_videos": 559
+  },
+  "checksums": {
+    "js_logic_after_c_md5": "cf218d2b0550fcf377afb033ddb63913",
+    "js_logic_length": 457543,
+    "c_block_md5": "6f1dc58da1081baffe49d698c3edbb90",
+    "c_block_length": 273204,
+    "getVideoProduct_md5": "51e0a2ee53b126328bff38d106022369",
+    "getCampCategory_md5": "72834a8462cfee9ee597bb68e946da60",
+    "getCampType_md5": "c01e2cd518ac9b77f71beaafb9091161"
+  },
+  "tab_locks": {
+    "tab1_YT_Performance": "unlocked",
+    "tab2_Creators": "unlocked",
+    "tab3_Insights": "locked",
+    "tab4_Rights_Tracker": "locked",
+    "tab5_Text_Assets": "locked",
+    "tab6_Image_Assets": "locked",
+    "tab7_Platform": "unlocked",
+    "tab8_Video_Analysis": "locked"
+  },
+  "access_code": "mosaic2026",
+  "creator_video_mapping": {
+    "Jovin": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "8GZrQOenSBo",
+        "jjxbd6ImrrM",
+        "NGYJjQKWsmU",
+        "FqWHyy2zZfc",
+        "qVHyQ7a5U3g",
+        "K0qloCJbxWQ"
+      ]
+    },
+    "Fahad": {
+      "type": "YT Creator",
+      "category": "Beard",
+      "video_ids": [
+        "nsH7-_dFO9k",
+        "WD4GMOFoC-I",
+        "nx5u_pOIdm4",
+        "xeiomAUNemo",
+        "bbenGSo2iIQ",
+        "vbKMeL2uuvc",
+        "pXQha5HZQdc",
+        "X_cXSZFtuGM",
+        "1CocRuQXY1o",
+        "DyAqxe26TmI",
+        "0gi_Hbh80zY",
+        "e8lsWH8omnY",
+        "-yfUzpmlJwE",
+        "5bJvE4iHeHk"
+      ]
+    },
+    "Manish Keshwani": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "PsAy1B4XScY",
+        "zoofqbNyOIk"
+      ]
+    },
+    "Vishal Bhati": {
+      "type": "Meta Creator",
+      "category": "Nutrition",
+      "video_ids": [
+        "5WLmyJ-HiU4",
+        "xVkEFrmRwYU"
+      ]
+    },
+    "Sumit Vaswani": {
+      "type": "Meta Creator",
+      "category": "Beard",
+      "video_ids": [
+        "7sAp6AVe3gY",
+        "-Ic6-QTCDBk"
+      ]
+    },
+    "Dr. Raj Parikh": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "1JVkbRaqRJ0",
+        "A8NrVoBc9Os",
+        "WHXslSnQE08",
+        "PgG-UQiU83g",
+        "qgAfl-2GRNA",
+        "-tWwQrTsjrM",
+        "Dr9Q0AGI9kU",
+        "EsnJ7a_4I_w",
+        "mLtXKnF1FeM",
+        "lCus6QmLY80",
+        "jkbrjRtOwM8",
+        "uimW-urfCP4",
+        "gX9HxxfJ9rw",
+        "zGA2Q_1vmTE",
+        "nbjUpZKo8GU",
+        "Zcy0dzocJLM"
+      ]
+    },
+    "Harsh Fit": {
+      "type": "YT Creator",
+      "category": "Nutrition",
+      "video_ids": [
+        "TaF8UQEUcas",
+        "-J3keV81ZlE",
+        "HzSCNkjTK2Y",
+        "qqSNNgSbTwQ",
+        "xXaAVzLWj9I",
+        "FYZenuuVWXU",
+        "hmaF8wisfF4",
+        "MwZEMCqYjrI",
+        "UBm32MCJSLE"
+      ]
+    },
+    "Lakshay Thakur": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "D2mMcS74fqw",
+        "wNKfhFk3DYc",
+        "e2dpzv73bIM",
+        "i5hH9oXtHY8",
+        "upP7wEyd40U"
+      ]
+    },
+    "Daniel": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "ZevefKX3SyU"
+      ]
+    },
+    "Deep": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "_2n_NxYNXg0",
+        "hz0xNLcJzUc",
+        "0ElMXWzOOsg",
+        "3CXMOPR_qlQ",
+        "q1FZX8UdggY",
+        "hLZ5uiueSEg",
+        "U7_gcgURNVw",
+        "effkzemDQHo"
+      ]
+    },
+    "Vishal Verma": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "sTO7J3esoWk",
+        "em7Z7RRs7_E",
+        "pcULZauZ_C0",
+        "_443-eicJWM"
+      ]
+    },
+    "Techy Eagle": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "zoeDEeW5vqA",
+        "wDelUiDzm0c",
+        "QP4tFFfqbRM",
+        "ynT58xymVsk",
+        "jR8ioI3eXlM",
+        "wPh50fINA8M",
+        "ESiiqkeK7HU",
+        "ofPO6JXE0jA",
+        "d_oWeJWlh0g",
+        "ZyG8KcNsZiA"
+      ]
+    },
+    "Ravi Rajput": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "YMWxz7etfN8",
+        "h80GJWRYCjY",
+        "eOfks7paL-4",
+        "sglUt3hPRS8",
+        "PsijyOkDZAY",
+        "6yqAElcdMLc",
+        "uqPQ5uBtVZo",
+        "pvKLG5QJ5_g"
+      ]
+    },
+    "Harsh Solanki": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "RUCcb4qMWs4",
+        "vvcvKNtEY-8",
+        "-hBOF0H1VZg",
+        "y0iC2fQzd8w",
+        "UKP53pqX0uI",
+        "f97ZzABuV3A",
+        "Y5Ae9ZLJ4co",
+        "ZzLXS-jY1Hk",
+        "HPFzTVoh6Qg",
+        "oUxzajc8PUE"
+      ]
+    },
+    "Nandish": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "h00CZCmV0Gg",
+        "MGZ3w51KgO0"
+      ]
+    },
+    "Pawan Khatri": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "zMFnfc0Bx98",
+        "rR6rMaNzM_k",
+        "sIL97BMiymU",
+        "ieRtW9B9VtU",
+        "Tf655dMM088",
+        "_YPH4aUBato",
+        "E-Mh0l1YgxA"
+      ]
+    },
+    "Avinash Jha": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "PH0agOJLSPk",
+        "n8tVq2NShks",
+        "buKNJVPohpk",
+        "EYjkv0goZQ4",
+        "xx6DyBohoYM"
+      ]
+    },
+    "Marketing Yatra": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "3sUiKOE30Ao",
+        "nrpN8BrV5xs",
+        "i6iekjxOYvA",
+        "StXW5v-y9_U",
+        "_XRKTEyir98",
+        "NedIpTySRqk",
+        "Sx2ZoQul5ZQ",
+        "yxLxfP-EmZk"
+      ]
+    },
+    "Rahul Badesra": {
+      "type": "YT Creator",
+      "category": "Beard",
+      "video_ids": [
+        "Sdz-uuGIgEU",
+        "u0uaY7WAWAE",
+        "HP8BJYKEjTY",
+        "nDzFwdIrh2I",
+        "QV5LLQDCVSw",
+        "TME7oVhkDOo",
+        "EWRUfB5ZmkA",
+        "67QuHgHyHtc",
+        "LI4nXzG8br8",
+        "w8YrtQi9AKI"
+      ]
+    },
+    "Rishabh Jain": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "HhEPmOEeQWk",
+        "4I459qc1yWE",
+        "wy0SFh-5ymU"
+      ]
+    },
+    "Rohit Sadhwani": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "U2SF-wWwgXs",
+        "KBpvdZ377oY",
+        "MR4C9GGyljQ",
+        "TzmWyKZuZFk",
+        "pLb0b7PzBk4",
+        "Cs5qRkHHDMI"
+      ]
+    },
+    "Suraj Drama": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "9BWvuGkP9BA",
+        "U5BbsyDFi8I"
+      ]
+    },
+    "Bhuvan Mehta": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "Z7YaxmvoN1s",
+        "n6ZYM4Ffxrw"
+      ]
+    },
+    "Jason": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "w6JL4RNJySs",
+        "7eN1LfvX1MU",
+        "aRXXHmQf2BE",
+        "-EjXRAfyIwM",
+        "_N9OO4-9-Es",
+        "ulfXf1SG4vA"
+      ]
+    },
+    "Sam Sameer": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "8zvzhwLCABU",
+        "ryzP9tNB73I",
+        "VKR7tkw15hI"
+      ]
+    },
+    "Dr. Akash Bhairikoppa": {
+      "type": "Meta Creator",
+      "category": "Beard",
+      "video_ids": [
+        "ZMt8TIRYBpA"
+      ]
+    },
+    "Dr. Mahesh": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "x5YwoQ5j6Ng",
+        "W5SnghMS_F0",
+        "6SwfZ9HsIaY",
+        "OEuBbSp379o",
+        "LEsOg1Ab_GU",
+        "pJrjpZz4Tuc",
+        "PBHgtkGTXrU"
+      ]
+    },
+    "Bhuvan": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "LH9Ofg4h8J8",
+        "i8s71PrwM5o"
+      ]
+    },
+    "The Dynamite Male": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "2HeiKu3XAeA",
+        "YDkGJeg8Zyc",
+        "G06GszFDeZs",
+        "aJIbPq_cEQ4",
+        "1QE_lPfekRs",
+        "3dUi1zDoXYs"
+      ]
+    },
+    "Ansh Karhana": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "4u2uANW2xRU",
+        "yxHFGw-r6nI",
+        "vYzIl0aqil0",
+        "bBZmh55Bd6A"
+      ]
+    },
+    "Shashank Grover": {
+      "type": "Meta Creator",
+      "category": "Nutrition",
+      "video_ids": [
+        "ubQaxGaeuFM",
+        "W5dC2-xtDrA",
+        "Hkw8nwllnH0",
+        "JhkirWRmUMI",
+        "GMjrubXozQc",
+        "6jNR0-hVHfM",
+        "miFGGpxPsBY",
+        "fPMWyDepTiI"
+      ]
+    },
+    "Sahil Maurya": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "cI8M3nJOvfU",
+        "LS8QyCpcDiw",
+        "OFw_T3WuFP8",
+        "oA8oKgZeIdE"
+      ]
+    },
+    "Dhammu": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "ZFocol8AP0Y"
+      ]
+    },
+    "Bharat Ahlawat": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "PZzKcdb1BOg",
+        "XVZhDQjk_wQ"
+      ]
+    },
+    "Ved Iyer": {
+      "type": "Meta Creator",
+      "category": "All Products",
+      "video_ids": [
+        "NlEQo-sY8RY",
+        "M6u2UhBhVfk",
+        "mJ78qUs2aFc",
+        "7CrIKq6O0p0",
+        "7EK2AUPxkXQ",
+        "-TvMr9Kjt5M",
+        "smFCjI0dnUo"
+      ]
+    },
+    "Rohit Bose": {
+      "type": "YT Creator",
+      "category": "All Products",
+      "video_ids": [
+        "RzPJGDmA1KE",
+        "c5MRIkDf3Ps",
+        "O5XfMnbfaf8",
+        "LjXYKDvp5Jg",
+        "G5c_hfAywic",
+        "Mm8NQUIVDpk",
+        "zwfxmd21UjQ",
+        "jQHFqeG8Pbs"
+      ]
+    },
+    "Parshant": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "yBF0QyDmKbg",
+        "iT4SUYjUa_s"
+      ]
+    },
+    "Rishab Rai": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "ffO0fYBM4Os",
+        "3dBRf5olfYU",
+        "OAI55zuKPng",
+        "ge8afwSjwtY"
+      ]
+    },
+    "Varun Aradya": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "fhk5lQyOMxk",
+        "WFS5rMyHAwY"
+      ]
+    },
+    "Doctor Duo": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "R832orvnvJw",
+        "Tvk132B91JI",
+        "OfeOlIADmS8",
+        "LvSlEIHW0Sk",
+        "Fv39OFuibQs",
+        "wLosI4wtZN8",
+        "NlXDcLbNlhU",
+        "82I-JYlSv2A",
+        "uGJMuLDbC40"
+      ]
+    },
+    "Suraj": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "takh5bm-iY0",
+        "JurOTafDnT4"
+      ]
+    },
+    "Chirag Barjatiya": {
+      "type": "Meta Creator",
+      "category": "All Products",
+      "video_ids": [
+        "xz7TJs_967Y",
+        "plF0QqPlv6Q",
+        "ZiwVoTY2RCU",
+        "EKufyBl1dcU",
+        "WHjrvFZqnWg",
+        "VIvbzBBOqeA",
+        "jS9KesxAHwM"
+      ]
+    },
+    "Dr Anant": {
+      "type": "Meta Creator",
+      "category": "Nutrition",
+      "video_ids": [
+        "21mDexQC2uU",
+        "aGtZVASu9Nk",
+        "wx5AQvvB138",
+        "54HVMf-FVA4"
+      ]
+    },
+    "Bharat": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "VSA7dSvrBR0",
+        "b52AmvD65y8",
+        "SQldprOaQkM",
+        "Z0wgHbdyA1I",
+        "Mt0pQlgoMlE",
+        "zaelMn2IR4Y",
+        "E6_jiHRfWZ8",
+        "dU_TNAVERQE"
+      ]
+    },
+    "Dhruv Bhatt": {
+      "type": "Meta Creator",
+      "category": "Nutrition",
+      "video_ids": [
+        "QPFQdnSS9sM",
+        "ZTcZR1YKo4o"
+      ]
+    },
+    "Ankit Gupta": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "9ikhgoE29X8",
+        "dzn9L7WQooQ"
+      ]
+    },
+    "Rishabh Soopa": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "RlD4PVyawSA"
+      ]
+    },
+    "Sofian": {
+      "type": "Meta Creator",
+      "category": "Nutrition",
+      "video_ids": [
+        "E5UX-z-mNp8",
+        "VhtHNla1rt0",
+        "lrGjlgCBU7A"
+      ]
+    },
+    "Chadtag": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "10DH2O61bws",
+        "dV7Kh_rrbCs",
+        "RKeLl_TMwvE",
+        "CZ488KPtqgU"
+      ]
+    },
+    "Head2Toe": {
+      "type": "YT Creator",
+      "category": "Beard",
+      "video_ids": [
+        "PGXFswrH0N8",
+        "enPXmebcDY4",
+        "4Gh5iVp0tyk"
+      ]
+    },
+    "Kartik Karkera": {
+      "type": "Meta Creator",
+      "category": "Nutrition",
+      "video_ids": [
+        "n42X5ChR6RI",
+        "p7YvWuTVDjE",
+        "j2Gk5E1-2xE",
+        "IhCTaYmeLWw",
+        "h2P14-zd2JQ"
+      ]
+    },
+    "Utkarsh Verma": {
+      "type": "Meta Creator",
+      "category": "Nutrition",
+      "video_ids": [
+        "DEq7nEG81Us",
+        "yAPb4DKg0d8",
+        "iHymW1g8m3c",
+        "Mm55i1RxYlE"
+      ]
+    },
+    "Arpit Sharma": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "O4AEXEDJC-Y",
+        "TnsUE3tH7OY",
+        "OePD1KJWws4",
+        "CoI8Jwdywz4",
+        "FVS4R3r61bY",
+        "NWVrPrIuAVw",
+        "e3hmGVAPKEQ"
+      ]
+    },
+    "Harshit Raj": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "qMOAdQKv0lE",
+        "AENC6bIsaEY",
+        "_vCAvNJue3g",
+        "G9NVfENHmD4",
+        "oQiPSuIPYRE"
+      ]
+    },
+    "Sahil Mourya": {
+      "type": "YT Creator",
+      "category": "Beard",
+      "video_ids": [
+        "vI1crkPfIpA",
+        "C2q1zuWU5YI",
+        "GqlK8xmZDNU"
+      ]
+    },
+    "Shubham Soni": {
+      "type": "YT Creator",
+      "category": "Beard",
+      "video_ids": [
+        "rIUvqNH1FlM",
+        "_8bZOnGddRw",
+        "qe933R80o1o",
+        "74dBwDGwVxE"
+      ]
+    },
+    "Zahid": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "EnkDiGu2QZk",
+        "oqaqKfLtDl8",
+        "DeU5iP6d9GA",
+        "5hQpBlW17Po"
+      ]
+    },
+    "Shubham Sadotra": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "dHKb1bRgagU",
+        "1az095J9KRw"
+      ]
+    },
+    "Pawan Yudi": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "PohLgymazuM",
+        "lsdfMWTYn-0",
+        "3BTpn2wqAHg",
+        "N02JFcW1TQk",
+        "u22KT_hTdRw"
+      ]
+    },
+    "Gaurav Pandey": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "3OvU92nRjeY"
+      ]
+    },
+    "Uday Jamwal": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "qjLrZuE8YG8",
+        "5M2wC_P70SY"
+      ]
+    },
+    "Gaurav Karan Chaudhary": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "6y_79CtgqMI",
+        "AJr4YMyEbro",
+        "zmtHgaSNYkA",
+        "MPuHkMN_wHI",
+        "jXt1D3J08gI"
+      ]
+    },
+    "Sumit Vasvani": {
+      "type": "YT Creator",
+      "category": "Beard",
+      "video_ids": [
+        "c2czGPDHl04",
+        "gJdxp5CAjuY",
+        "Z8APiVzcxAM",
+        "TuiElTGr720"
+      ]
+    },
+    "Sahil Sill": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "8iP4CTjCQVM",
+        "Ml33Y_yE4Nc"
+      ]
+    },
+    "Pranav Jain": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "7w1eK8y64AM",
+        "MXw_8yHkvws"
+      ]
+    },
+    "Dr. Fact": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "AYwa-z7odIU"
+      ]
+    },
+    "Amit": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "X6fRhqkU6V4",
+        "LF57v6iwAgo",
+        "glgsP9ESi_c"
+      ]
+    },
+    "Kush Malhotra": {
+      "type": "Meta Creator",
+      "category": "All Products",
+      "video_ids": [
+        "d6q06DhsDn8",
+        "C9IgAy43RwU"
+      ]
+    },
+    "Shaikh Lifestyle": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "wDzXuFXGVuY",
+        "PRrmcA05GAc",
+        "yKCxJnhLakI",
+        "v0mgw7UrhiU",
+        "yDV1Jo6qes0"
+      ]
+    },
+    "Devendra": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "Uwhvwp4QD-c"
+      ]
+    },
+    "Vinu Arora": {
+      "type": "YT Creator",
+      "category": "Nutrition",
+      "video_ids": [
+        "8b-EdfRs870",
+        "illQ3_A4dEU",
+        "n4-zyjmJAtA"
+      ]
+    },
+    "Devanesh": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "oaclC9G5MO4",
+        "C0Q-d06JkX0"
+      ]
+    },
+    "Kartavya Khurna": {
+      "type": "YT Creator",
+      "category": "Nutrition",
+      "video_ids": [
+        "m1sQ5LDeTyI",
+        "IoN_DQ7nOhw",
+        "5SVfk00a6vs",
+        "9_DoKBp4OiI",
+        "xWH8A9Ljksc"
+      ]
+    },
+    "Rohit Sadwani": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "-hJThIuYWm4",
+        "p76GaLPmcjs"
+      ]
+    },
+    "Dr Akash": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "G2HegjvR0gs",
+        "-eerGYa4Ug8",
+        "SQDrjp8dO40",
+        "9p9L0At1Dh8",
+        "u-HTAOkjRvQ"
+      ]
+    },
+    "Sri Verma": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "A5N6RGFzv_o",
+        "WyJbgwX-PwY"
+      ]
+    },
+    "Varun Aradhya": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "Ba3blzt1MPQ",
+        "J9M68DLGHGU"
+      ]
+    },
+    "Swaraj": {
+      "type": "Meta Creator",
+      "category": "All Products",
+      "video_ids": [
+        "nqd_8WCX6T8"
+      ]
+    },
+    "Asad Styling": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "xu4hs-44wOA",
+        "u5e-KWnBuEc"
+      ]
+    },
+    "Hitesh Grover": {
+      "type": "Meta Creator",
+      "category": "All Products",
+      "video_ids": [
+        "MWPT-zNAqPE"
+      ]
+    },
+    "Karun Josh": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "3ClIxNcnA8c"
+      ]
+    },
+    "Utkarsh": {
+      "type": "Meta Creator",
+      "category": "All Products",
+      "video_ids": [
+        "BzOl1lKndNA"
+      ]
+    },
+    "Sae Surenddra": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "vMD2edMU-Bw",
+        "9aV-pinmGO8",
+        "FiRIyGHIQA8",
+        "CkjcWXbrlvM"
+      ]
+    },
+    "Head 2 Toe": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "FfJqtLkPrt4",
+        "5tuFXLRIJLo"
+      ]
+    },
+    "Shivam": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "_pMjmhhRamY",
+        "CAonO-p1K5s"
+      ]
+    },
+    "DS Bossko": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "Lfcgf3ZMJN4",
+        "XBdmgA_A45k"
+      ]
+    },
+    "Vineeth": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "SRz3db0K-5s",
+        "Kb1GYImK1ws",
+        "KM10G1mKRvM"
+      ]
+    },
+    "Nitin Kalsotra": {
+      "type": "Meta Creator",
+      "category": "All Products",
+      "video_ids": [
+        "Dv59OEdl2d4"
+      ]
+    },
+    "Kanuraj": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "HXL2AJThQbM",
+        "n0K_ZvRLDmg"
+      ]
+    },
+    "Barbershop": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "kfEflzxMNDM"
+      ]
+    },
+    "Amit Dangi": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "A08f32Th1sg",
+        "DQ8QxzytjI8"
+      ]
+    },
+    "Vethashivan": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "cbYAPYsfX2g"
+      ]
+    },
+    "Rounak Ajamani": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "DBu-vrVqpXQ",
+        "gKyYxfby3VQ",
+        "2VyHjuHs2Sg"
+      ]
+    },
+    "The Dark Truth": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "uwtLCjnThm8",
+        "lsUgLqH3Uqs"
+      ]
+    },
+    "Prashant Rathi": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "Qh3eG6xK9Tw",
+        "a83x4BosI20"
+      ]
+    },
+    "Visible Gyan": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "s7y-mUBhTeI",
+        "UKYn0dEEXlE"
+      ]
+    },
+    "Avinas": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "PboR9eFSLZw",
+        "HLR_Qoh-hWw",
+        "ZM8Wy4_dvkY",
+        "RWUYSVkB01Q",
+        "LeI_hsIhhb8"
+      ]
+    },
+    "Dileep Kumar": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "chcccyKDqRk",
+        "Jvk97edbo90",
+        "CAXg-tboqPE"
+      ]
+    },
+    "Lakshya Chopra": {
+      "type": "YT Creator",
+      "category": "All Products",
+      "video_ids": [
+        "qVaBcOqKE50",
+        "z121SaH4dJM",
+        "DdeFxX4vIGU",
+        "SHmsQYRSLNo",
+        "wtf2EAvLBNw"
+      ]
+    },
+    "Arpit": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "b344tBs3Ek0",
+        "o57M_9kvBP8"
+      ]
+    },
+    "Yash Sharma Fitness": {
+      "type": "YT Creator",
+      "category": "All Products",
+      "video_ids": [
+        "VB8VUvvwpGA",
+        "EVG3ntuXRe8"
+      ]
+    },
+    "Priyanshu Kataria": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "q3Ve2LHygW4"
+      ]
+    },
+    "Aviraj Pardesi": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "lzHQCoKtva0"
+      ]
+    },
+    "Nikhil": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "tzZLikhEGKk"
+      ]
+    },
+    "Let Unravel": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "Zi_kYX8Kmpg",
+        "hlUNGx8lbzM"
+      ]
+    },
+    "Karthik Nambiyar": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "i55rHdP1WY8",
+        "H0X_Gvh5NjM",
+        "sF7I5o6DjAU",
+        "zMmB1G4SxZY",
+        "oP6pz8ZT4sY"
+      ]
+    },
+    "Arjun King": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "Mvb1X5-ld-c",
+        "-I5_xhlYf0o",
+        "_DHingE2okI",
+        "U37XuiY0Uoc"
+      ]
+    },
+    "Prajval Prince": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "zwneGtpD9ys",
+        "txP36oMVRoc",
+        "s4wgM_GXfso"
+      ]
+    },
+    "Prasanna Naik": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "PyBISFzxYiY"
+      ]
+    },
+    "Saikat": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "CRfEgFPUvAI"
+      ]
+    },
+    "Nikhil Gowda": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "vVGKxRWl53M"
+      ]
+    },
+    "Prathik Shetty": {
+      "type": "Meta Creator",
+      "category": "Hair",
+      "video_ids": [
+        "NzpzK37hYqo",
+        "3crj966q6AA"
+      ]
+    },
+    "Kannada": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "9BWvuGkP9BA",
+        "8zvzhwLCABU",
+        "rR6rMaNzM_k",
+        "sIL97BMiymU",
+        "ryzP9tNB73I",
+        "fhk5lQyOMxk",
+        "ffO0fYBM4Os",
+        "takh5bm-iY0",
+        "Tf655dMM088",
+        "6SwfZ9HsIaY",
+        "PgG-UQiU83g",
+        "8iP4CTjCQVM",
+        "dV7Kh_rrbCs",
+        "JurOTafDnT4",
+        "Ba3blzt1MPQ",
+        "Dr9Q0AGI9kU",
+        "OAI55zuKPng",
+        "pJrjpZz4Tuc",
+        "u8AOR_Qo6ME",
+        "Qh3eG6xK9Tw",
+        "FCy4jo7icX8",
+        "0rIvbKornaQ",
+        "hcjlGZU0i-g",
+        "PsijyOkDZAY",
+        "WFS5rMyHAwY",
+        "ujBBp3uYWh8",
+        "Ml33Y_yE4Nc",
+        "eQ__cuz9i8g",
+        "a83x4BosI20",
+        "R6N2iNpzoes",
+        "LTOPFBvgAZI",
+        "J9M68DLGHGU",
+        "CZ488KPtqgU",
+        "Bn469fF1NjA",
+        "iT4SUYjUa_s",
+        "Mvb1X5-ld-c",
+        "_DHingE2okI",
+        "AAJBfR4MMvI",
+        "sF7I5o6DjAU",
+        "U37XuiY0Uoc",
+        "i55rHdP1WY8",
+        "PyBISFzxYiY",
+        "zwneGtpD9ys",
+        "txP36oMVRoc",
+        "vVGKxRWl53M",
+        "NzpzK37hYqo",
+        "3crj966q6AA",
+        "anFk5r6jnPk",
+        "s4wgM_GXfso",
+        "eptmBO4ukEg",
+        "ktlipFLBtnc",
+        "-I5_xhlYf0o",
+        "zMmB1G4SxZY",
+        "oP6pz8ZT4sY",
+        "H0X_Gvh5NjM",
+        "RWUYSVkB01Q",
+        "zVyuhGkSS98",
+        "CRfEgFPUvAI",
+        "LeI_hsIhhb8",
+        "U5BbsyDFi8I",
+        "VKR7tkw15hI"
+      ]
+    },
+    "Telugu": {
+      "type": "YT Creator",
+      "category": "Hair",
+      "video_ids": [
+        "WnfG2YKur74",
+        "WRbfWPrazwg",
+        "yBF0QyDmKbg",
+        "IB8Lxa6-Nfw",
+        "W5SnghMS_F0",
+        "VJ29LcvfGJw",
+        "RlD4PVyawSA",
+        "10DH2O61bws",
+        "499KmAK-kWc",
+        "EQPh_kh5NYc",
+        "3dBRf5olfYU",
+        "3OvU92nRjeY",
+        "4-O7vU1SyuA",
+        "n6ZYM4Ffxrw",
+        "24Ei1pYwSSc",
+        "qgAfl-2GRNA",
+        "-EjXRAfyIwM",
+        "XucSvvYLqY4",
+        "vqXDvlr4yWU",
+        "OEuBbSp379o",
+        "A5N6RGFzv_o",
+        "9iwrL7sfEsg",
+        "h80GJWRYCjY",
+        "3ClIxNcnA8c",
+        "-N3ZJ9hqyxw",
+        "zK8dDDSDg6Q",
+        "TUKTqB7K8DU",
+        "3EfM33C3RZg",
+        "kfEflzxMNDM",
+        "vMD2edMU-Bw",
+        "WyJbgwX-PwY",
+        "ge8afwSjwtY",
+        "SRz3db0K-5s",
+        "19axRuoSRkI",
+        "auTNvP189Cc",
+        "9aV-pinmGO8",
+        "eOfks7paL-4",
+        "-qb_oM9FmHQ",
+        "FiRIyGHIQA8",
+        "chcccyKDqRk",
+        "Kb1GYImK1ws",
+        "CkjcWXbrlvM",
+        "2cTgZ5Q_uZ0",
+        "H8suqijzclo",
+        "KM10G1mKRvM",
+        "HLR_Qoh-hWw",
+        "1vXyougTieo",
+        "zGA2Q_1vmTE",
+        "RKeLl_TMwvE",
+        "NDOpvuROMvc",
+        "joepza_Ie1w",
+        "pNiMFELwRNk",
+        "tzZLikhEGKk",
+        "Jvk97edbo90",
+        "CAXg-tboqPE",
+        "GKvYOZef_q0",
+        "gdyoNGjXNh4",
+        "pGc5u8NzfuI",
+        "ZN5OyGCtk04",
+        "ttvP7x2J35s",
+        "b7LUoFsPGec",
+        "8GSr5Hbcj3E",
+        "Wpx7ulL9e2w",
+        "7d15Vswd95c",
+        "-FNJ8_Ybntk",
+        "M13ga2crg5I",
+        "8Hzg312cecE",
+        "up-yjaphOU8",
+        "Oc8aAcVmuY4",
+        "XkLEfrnd_24",
+        "nQaXchTdkfY",
+        "8lHHvRN4YqM",
+        "m7t_Iozg5G8",
+        "Fhr8DM6YGGE",
+        "C5VuH9uD_l8",
+        "1uqdvhXGBzU",
+        "qPJJGb7_Rt0",
+        "sgd9m4X_z5s",
+        "v_HozV1NuCo",
+        "YA8asEmluMU",
+        "Z6kgo2MfWNg"
+      ]
+    }
+  }
+}
