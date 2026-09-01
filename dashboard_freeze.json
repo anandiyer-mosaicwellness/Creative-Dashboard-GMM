@@ -3,18 +3,18 @@
   "generated": "2026-08-03",
   "dashboard_file": "MM_YT_Dashboard 0807 V3.html",
   "data_state": {
-    "week_count": 27,
+    "week_count": 28,
     "first_week": "Wk1 (23Feb-1Mar)",
-    "last_week": "Wk27 (17Aug-23Aug)",
-    "video_count": 1314,
-    "creator_count": 127,
+    "last_week": "Wk28 (24Aug-30Aug)",
+    "video_count": 1346,
+    "creator_count": 129,
     "total_mapped_videos": 559
   },
   "checksums": {
-    "js_logic_after_c_md5": "cf218d2b0550fcf377afb033ddb63913",
-    "js_logic_length": 457543,
-    "c_block_md5": "6f1dc58da1081baffe49d698c3edbb90",
-    "c_block_length": 273204,
+    "js_logic_after_c_md5": "f61c9907be55a3ede60f7b3aa36e486a",
+    "js_logic_length": 442305,
+    "c_block_md5": "9c63b31cb476e331814c4d6fa7a05489",
+    "c_block_length": 281787,
     "getVideoProduct_md5": "51e0a2ee53b126328bff38d106022369",
     "getCampCategory_md5": "72834a8462cfee9ee597bb68e946da60",
     "getCampType_md5": "c01e2cd518ac9b77f71beaafb9091161"
