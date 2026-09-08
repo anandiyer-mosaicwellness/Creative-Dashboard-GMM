@@ -5023,6 +5023,18 @@ window.bkDraw=bkDraw;
 #tab9 .vi-pg-btn{padding:4px 10px;border:1px solid var(--border);border-radius:5px;background:var(--white);color:var(--navy);font-size:11px;cursor:pointer;font-family:inherit}
 #tab9 .vi-pg-btn:disabled{opacity:.4;cursor:default}
 #tab9 .vi-cmp-legend{display:flex;gap:14px;font-size:10px;margin-bottom:8px;color:var(--muted)}
+#tab9 .vi-wp-btn{padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--navy);font-size:13px;cursor:pointer;white-space:nowrap;font-family:inherit;min-width:120px;text-align:left}
+#tab9 .vi-wp-btn.on{border-color:#3b82f6;color:#3b82f6;background:#eff6ff}
+#tab9 .vi-wp-pop{display:none;position:absolute;top:calc(100% + 6px);left:0;background:var(--white);border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.14);z-index:400;width:260px}
+#tab9 .vi-wp-pop.open{display:block}
+#tab9 .vi-wp-actions{display:flex;gap:5px;padding:8px 10px;border-bottom:1px solid var(--border)}
+#tab9 .vi-wp-actions button{flex:1;padding:4px 0;border:1px solid var(--border);border-radius:5px;background:var(--white);color:var(--navy);font-size:11px;font-weight:600;cursor:pointer;font-family:inherit}
+#tab9 .vi-wp-actions button:hover{background:var(--bg)}
+#tab9 .vi-wp-list{max-height:240px;overflow-y:auto;padding:6px 0}
+#tab9 .vi-wp-list label{display:flex;align-items:center;gap:8px;padding:4px 12px;cursor:pointer;font-size:12px}
+#tab9 .vi-wp-list label:hover{background:var(--bg)}
+#tab9 .vi-wp-list input[type=checkbox]{cursor:pointer}
+#tab9 .vi-wp-apply{width:100%;padding:6px;border:none;border-radius:6px;background:#3b82f6;color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
 @media(prefers-color-scheme:dark){
   #tab9 .cs-s{background:#064e3b;color:#6ee7b7} #tab9 .cs-a{background:#1e3a5f;color:#93c5fd}
   #tab9 .cs-b{background:#451a03;color:#fde68a} #tab9 .cs-c{background:#450a0a;color:#fca5a5}
@@ -5047,10 +5059,22 @@ window.bkDraw=bkDraw;
       </select>
     </div>
     <div class="vi-div"></div>
-    <div class="fg"><span class="flabel">Week</span>
-      <select id="vi-week" onchange="viRender()">
-        <option value="all">All Time</option>
-      </select>
+    <!-- Multi-week picker -->
+    <div class="fg" style="position:relative">
+      <span class="flabel">Week</span>
+      <button class="vi-wp-btn" id="vi-wp-btn" onclick="viToggleWkPop()">All Time ▾</button>
+      <div class="vi-wp-pop" id="vi-wp-pop">
+        <div class="vi-wp-actions">
+          <button onclick="viWkSelectAll()">All</button>
+          <button onclick="viWkClear()">Clear</button>
+          <button onclick="viWkLast(4)">Last 4</button>
+          <button onclick="viWkLast(8)">Last 8</button>
+        </div>
+        <div class="vi-wp-list" id="vi-wp-list"></div>
+        <div style="padding:6px 10px;border-top:1px solid var(--border)">
+          <button class="vi-wp-apply" onclick="viApplyWkPop()">Apply</button>
+        </div>
+      </div>
     </div>
     <div class="vi-div"></div>
     <label class="vi-cmp-toggle" id="vi-cmp-wrap" style="display:none">
@@ -5224,17 +5248,48 @@ function vi_getCat(v){
 
 let viInitDone=false, VI_VIDEOS=[], VI_WEEK_LABELS=[];
 let viPage=0, viPerPage=30, viBase=[], viFiltered=[];
-let viWi=-1, viCmp=false, viWiP=-2;
+// viSelWeeks: [] = all time; [i,...] = specific weeks
+let viSelWeeks=[], viCmp=false;
 let viSpActive=false, viSpOp='gt', viSpAmt=null;
+
+// ── Week picker ──
+function viToggleWkPop(){ document.getElementById('vi-wp-pop').classList.toggle('open'); }
+function viWkSelectAll(){ document.querySelectorAll('#vi-wp-list input').forEach(c=>c.checked=true); }
+function viWkClear(){ document.querySelectorAll('#vi-wp-list input').forEach(c=>c.checked=false); }
+function viWkLast(n){
+  const all=[...document.querySelectorAll('#vi-wp-list input')];
+  all.forEach(c=>c.checked=false);
+  all.slice(-n).forEach(c=>c.checked=true);
+}
+function viApplyWkPop(){
+  const checked=[...document.querySelectorAll('#vi-wp-list input:checked')].map(c=>parseInt(c.value));
+  const allCount=document.querySelectorAll('#vi-wp-list input').length;
+  viSelWeeks = checked.length===allCount ? [] : checked;
+  // Update button label
+  const btn=document.getElementById('vi-wp-btn');
+  if(viSelWeeks.length===0) btn.textContent='All Time ▾';
+  else if(viSelWeeks.length===1) btn.textContent=VI_WEEK_LABELS[viSelWeeks[0]]+' ▾';
+  else btn.textContent=viSelWeeks.length+' weeks selected ▾';
+  btn.classList.toggle('on', viSelWeeks.length>0);
+  // Compare only valid for exactly 1 week with a predecessor
+  const cmpWrap=document.getElementById('vi-cmp-wrap');
+  cmpWrap.style.display=(viSelWeeks.length===1&&viSelWeeks[0]>=1)?'flex':'none';
+  if(!(viSelWeeks.length===1&&viSelWeeks[0]>=1)) document.getElementById('vi-cmp').checked=false;
+  document.getElementById('vi-wp-pop').classList.remove('open');
+  viRender();
+}
+document.addEventListener('click',e=>{
+  const wp=document.getElementById('vi-wp-wrap')||document.querySelector('#tab9 .vi-wp-btn')?.closest('.fg');
+  if(wp&&!wp.contains(e.target)) document.getElementById('vi-wp-pop').classList.remove('open');
+});
 
 function viInit(){
   if(viInitDone) return; viInitDone=true;
-  // Build VIDEOS array from D block
   VI_WEEK_LABELS = D.meta.week_labels;
   const N = VI_WEEK_LABELS.length;
-  // Populate week dropdown
-  const wsel=document.getElementById('vi-week');
-  VI_WEEK_LABELS.forEach((l,i)=>{ const o=document.createElement('option'); o.value=i; o.textContent=l; wsel.appendChild(o); });
+  // Build week picker checkboxes
+  document.getElementById('vi-wp-list').innerHTML=VI_WEEK_LABELS.map((l,i)=>
+    `<label><input type="checkbox" value="${i}" checked> ${l}</label>`).join('');
   D.videos.forEach(v=>{
     const meta = VI_META[v.id]||{};
     const bkt  = vi_getBkt(VI_DUR[v.id]);
@@ -5251,14 +5306,16 @@ function viInit(){
   viRender();
 }
 
-function viComputeBkt(wi,cat){
+// wks: [] = all time, [i,...] = specific week indices
+function viComputeBkt(wks,cat){
   const out={};
   VI_BUCKETS.forEach(b=>{ out[b]={vids:0,spend:0,conv:0}; });
   VI_VIDEOS.forEach(v=>{
     if(cat!=='All'&&v.cat!==cat) return;
-    const sp=wi===-1?v.total:v.wSp[wi];
-    const cv=wi===-1?v.total_conv:v.wCv[wi];
-    if(wi>=0&&sp===0) return;
+    let sp,cv;
+    if(wks.length===0){ sp=v.total; cv=v.total_conv; }
+    else { sp=wks.reduce((s,i)=>s+v.wSp[i],0); cv=wks.reduce((s,i)=>s+v.wCv[i],0); }
+    if(wks.length>0&&sp===0) return;
     out[v.bkt].vids++; out[v.bkt].spend+=sp; out[v.bkt].conv+=cv;
   });
   return out;
@@ -5273,16 +5330,12 @@ function viDelta(cur,prev,inv){
 
 function viRender(){
   const cat=document.getElementById('vi-cat').value;
-  const wv =document.getElementById('vi-week').value;
-  const wi =wv==='all'?-1:parseInt(wv);
-  const cmp=document.getElementById('vi-cmp').checked&&wi>=1;
-  const wiP=cmp?wi-1:-2;
-  viWi=wi; viCmp=cmp; viWiP=wiP;
-  document.getElementById('vi-cmp-wrap').style.display=wi>=0?'flex':'none';
-  if(wi<1) document.getElementById('vi-cmp').checked=false;
+  const cmp=document.getElementById('vi-cmp').checked&&(viSelWeeks.length===1&&viSelWeeks[0]>=1);
+  viCmp=cmp;
+  const prevWks=cmp?[viSelWeeks[0]-1]:[];
 
-  const data=viComputeBkt(wi,cat);
-  const prev=cmp?viComputeBkt(wiP,cat):null;
+  const data=viComputeBkt(viSelWeeks,cat);
+  const prev=cmp?viComputeBkt(prevWks,cat):null;
   const totSp=Object.values(data).reduce((s,v)=>s+v.spend,0);
   const totCv=Object.values(data).reduce((s,v)=>s+v.conv,0);
   const totVi=Object.values(data).reduce((s,v)=>s+v.vids,0);
@@ -5290,7 +5343,12 @@ function viRender(){
   let spP=0,cvP=0,caP=0;
   if(prev){spP=Object.values(prev).reduce((s,v)=>s+v.spend,0);cvP=Object.values(prev).reduce((s,v)=>s+v.conv,0);caP=cvP>0?spP/cvP:0;}
 
-  const wLabel=wi===-1?'lifetime':VI_WEEK_LABELS[wi];
+  // KPI sub-label
+  let wLabel;
+  if(viSelWeeks.length===0) wLabel='lifetime';
+  else if(viSelWeeks.length===1) wLabel=VI_WEEK_LABELS[viSelWeeks[0]];
+  else wLabel=`${viSelWeeks.length} weeks`;
+
   document.getElementById('vi-kpi').innerHTML=[
     {l:'Total Spend',v:vi_inr(totSp),s:wLabel,d:prev?viDelta(totSp,spP,false):''},
     {l:'Conversions',v:Math.round(totCv).toLocaleString('en-IN'),s:wLabel,d:prev?viDelta(totCv,cvP,false):''},
@@ -5301,18 +5359,23 @@ function viRender(){
   // Insight
   let bestB=null,bestC=Infinity;
   VI_BUCKETS.filter(b=>b!=='Unknown').forEach(b=>{ const{spend,conv}=data[b]; if(conv>0){ const c=spend/conv; if(c<bestC){bestC=c;bestB=b;} } });
-  let ins=wi===-1
-    ?`<strong>31–60s is the dominant bucket</strong> — ${data['31–60s'].vids} videos, ${vi_inr(data['31–60s'].spend)} spend. `
-    :`<strong>${VI_WEEK_LABELS[wi]}</strong>: ${Math.round(totCv).toLocaleString()} conv, ${vi_inr(totSp)} across ${totVi} active videos. `;
+  let ins;
+  if(viSelWeeks.length===0) ins=`<strong>31–60s is the dominant bucket</strong> — ${data['31–60s'].vids} videos, ${vi_inr(data['31–60s'].spend)} spend. `;
+  else if(viSelWeeks.length===1) ins=`<strong>${VI_WEEK_LABELS[viSelWeeks[0]]}</strong>: ${Math.round(totCv).toLocaleString()} conv, ${vi_inr(totSp)} across ${totVi} active videos. `;
+  else ins=`<strong>${viSelWeeks.length} weeks selected</strong>: ${Math.round(totCv).toLocaleString()} conv, ${vi_inr(totSp)} spend across ${totVi} active videos. `;
   if(bestB) ins+=`Best CAC: <strong>${bestB}</strong> at ${vi_inr(bestC)}. `;
   ins+=`${data['Unknown'].vids} videos have unknown duration.`;
-  if(prev){ const d=totSp-spP; ins+=` Spend ${d>=0?'↑':'↓'} ${vi_inr(Math.abs(d))} vs ${VI_WEEK_LABELS[wiP]}.`; }
+  if(prev){ const d=totSp-spP; ins+=` Spend ${d>=0?'↑':'↓'} ${vi_inr(Math.abs(d))} vs ${VI_WEEK_LABELS[prevWks[0]]}.`; }
   document.getElementById('vi-ins').innerHTML=ins;
 
-  // Chart
-  document.getElementById('vi-chart-title').textContent=wi===-1?'Lifetime spend by duration bucket':`Spend by bucket · ${VI_WEEK_LABELS[wi]}${cmp?' vs '+VI_WEEK_LABELS[wiP]:''}`;
+  // Chart title
+  let chartTitle;
+  if(viSelWeeks.length===0) chartTitle='Lifetime spend by duration bucket';
+  else if(viSelWeeks.length===1) chartTitle=`Spend by bucket · ${VI_WEEK_LABELS[viSelWeeks[0]]}${cmp?' vs '+VI_WEEK_LABELS[prevWks[0]]:''}`;
+  else chartTitle=`Spend by bucket · ${viSelWeeks.length} weeks`;
+  document.getElementById('vi-chart-title').textContent=chartTitle;
   const lgEl=document.getElementById('vi-cmp-legend');
-  if(cmp){ lgEl.style.display='flex'; lgEl.innerHTML=`<span>● Solid = ${VI_WEEK_LABELS[wi]}</span><span style="opacity:.45">● Faded = ${VI_WEEK_LABELS[wiP]}</span>`; } else lgEl.style.display='none';
+  if(cmp){ lgEl.style.display='flex'; lgEl.innerHTML=`<span>● Solid = ${VI_WEEK_LABELS[viSelWeeks[0]]}</span><span style="opacity:.45">● Faded = ${VI_WEEK_LABELS[prevWks[0]]}</span>`; } else lgEl.style.display='none';
   const maxSp=Math.max(...VI_BUCKETS.map(b=>Math.max(data[b].spend,prev?prev[b].spend:0)));
   document.getElementById('vi-bars').innerHTML=VI_BUCKETS.map(b=>{
     const{spend,conv}=data[b]; const pct=maxSp>0?spend/maxSp*100:0; const col=VI_BKT_COLORS[b]; const cac=conv>0?spend/conv:0;
@@ -5328,20 +5391,25 @@ function viRender(){
     return `<tr><td><span class="vi-bkt-dot" style="background:${VI_BKT_COLORS[b]}"></span>${b}</td><td class="r">${vids}</td><td class="r">${vi_inr(spend)}${dSp}</td><td class="r">${Math.round(conv).toLocaleString('en-IN')}${dCv}</td><td class="r"><span class="cs ${vi_cacCls(cac)}">${cac>0?vi_inr(cac):'–'}</span>${dCa}</td><td class="r">${spPct.toFixed(1)}%</td></tr>`;
   }).join('');
 
-  document.getElementById('vi-sp-hdr').textContent=wi===-1?'Spend (Total)':`Spend (${VI_WEEK_LABELS[wi]})`;
-  viRebuildBase(wi,cat);
+  // Spend column header
+  if(viSelWeeks.length===0) document.getElementById('vi-sp-hdr').textContent='Spend (Total)';
+  else if(viSelWeeks.length===1) document.getElementById('vi-sp-hdr').textContent=`Spend (${VI_WEEK_LABELS[viSelWeeks[0]]})`;
+  else document.getElementById('vi-sp-hdr').textContent=`Spend (${viSelWeeks.length} wks)`;
+
+  viRebuildBase(cat);
   viPage=0; viApplyVidFilters();
 }
 
-function viRebuildBase(wi,cat){
+function viRebuildBase(cat){
   viBase=VI_VIDEOS.filter(v=>{
     if(cat!=='All'&&v.cat!==cat) return false;
-    if(wi>=0&&v.wSp[wi]===0) return false;
+    if(viSelWeeks.length>0){ const sp=viSelWeeks.reduce((s,i)=>s+v.wSp[i],0); if(sp===0) return false; }
     return true;
   }).map(v=>{
-    const sp=viWi===-1?v.total:v.wSp[viWi];
-    const cv=viWi===-1?v.total_conv:v.wCv[viWi];
-    const pSp=viCmp&&viWiP>=0?v.wSp[viWiP]:null;
+    let sp,cv,pSp=null;
+    if(viSelWeeks.length===0){ sp=v.total; cv=v.total_conv; }
+    else{ sp=viSelWeeks.reduce((s,i)=>s+v.wSp[i],0); cv=viSelWeeks.reduce((s,i)=>s+v.wCv[i],0); }
+    if(viCmp&&viSelWeeks.length===1&&viSelWeeks[0]>=1) pSp=v.wSp[viSelWeeks[0]-1];
     return {...v,_sp:sp,_cv:cv,_pSp:pSp};
   }).sort((a,b)=>b._sp-a._sp);
 }
@@ -5431,6 +5499,11 @@ window.viTogglePop=viTogglePop;
 window.viApplySpend=viApplySpend;
 window.viClearSpend=viClearSpend;
 window.viChangePage=viChangePage;
+window.viToggleWkPop=viToggleWkPop;
+window.viApplyWkPop=viApplyWkPop;
+window.viWkSelectAll=viWkSelectAll;
+window.viWkClear=viWkClear;
+window.viWkLast=viWkLast;
 })();
 </script>
 </div><!-- end tab9 -->
