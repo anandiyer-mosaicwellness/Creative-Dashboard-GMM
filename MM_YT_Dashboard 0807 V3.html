@@ -5077,6 +5077,22 @@ window.bkDraw=bkDraw;
       </div>
     </div>
     <div class="vi-div"></div>
+    <div class="fg"><span class="flabel">Dimension</span>
+      <select id="vi-dim" onchange="viRender()">
+        <option value="All">All</option>
+        <option value="16:9">16:9</option>
+        <option value="9:16">9:16</option>
+      </select>
+    </div>
+    <div class="vi-div"></div>
+    <div class="fg"><span class="flabel">Creator Type</span>
+      <select id="vi-ct" onchange="viRender()">
+        <option value="All">All</option>
+        <option value="YT Creator">YT Creator</option>
+        <option value="Meta Creator">Meta Creator</option>
+      </select>
+    </div>
+    <div class="vi-div"></div>
     <label class="vi-cmp-toggle" id="vi-cmp-wrap" style="display:none">
       <input type="checkbox" id="vi-cmp" onchange="viRender()">
       vs prev week <span class="vi-cmp-badge">Δ</span>
@@ -5312,11 +5328,13 @@ function viInit(){
 }
 
 // wks: [] = all time, [i,...] = specific week indices
-function viComputeBkt(wks,cat){
+function viComputeBkt(wks,cat,dim,ct){
   const out={};
   VI_BUCKETS.forEach(b=>{ out[b]={vids:0,spend:0,conv:0}; });
   VI_VIDEOS.forEach(v=>{
     if(cat!=='All'&&v.cat!==cat) return;
+    if(dim!=='All'&&v.dim!==dim) return;
+    if(ct!=='All'&&v.creator_type!==ct) return;
     let sp,cv;
     if(wks.length===0){ sp=v.total; cv=v.total_conv; }
     else { sp=wks.reduce((s,i)=>s+v.wSp[i],0); cv=wks.reduce((s,i)=>s+v.wCv[i],0); }
@@ -5335,12 +5353,14 @@ function viDelta(cur,prev,inv){
 
 function viRender(){
   const cat=document.getElementById('vi-cat').value;
+  const dim=document.getElementById('vi-dim').value;
+  const ct =document.getElementById('vi-ct').value;
   const cmp=document.getElementById('vi-cmp').checked&&(viSelWeeks.length===1&&viSelWeeks[0]>=1);
   viCmp=cmp;
   const prevWks=cmp?[viSelWeeks[0]-1]:[];
 
-  const data=viComputeBkt(viSelWeeks,cat);
-  const prev=cmp?viComputeBkt(prevWks,cat):null;
+  const data=viComputeBkt(viSelWeeks,cat,dim,ct);
+  const prev=cmp?viComputeBkt(prevWks,cat,dim,ct):null;
   const totSp=Object.values(data).reduce((s,v)=>s+v.spend,0);
   const totCv=Object.values(data).reduce((s,v)=>s+v.conv,0);
   const totVi=Object.values(data).reduce((s,v)=>s+v.vids,0);
@@ -5401,13 +5421,15 @@ function viRender(){
   else if(viSelWeeks.length===1) document.getElementById('vi-sp-hdr').textContent=`Spend (${VI_WEEK_LABELS[viSelWeeks[0]]})`;
   else document.getElementById('vi-sp-hdr').textContent=`Spend (${viSelWeeks.length} wks)`;
 
-  viRebuildBase(cat);
+  viRebuildBase(cat,dim,ct);
   viPage=0; viApplyVidFilters();
 }
 
-function viRebuildBase(cat){
+function viRebuildBase(cat,dim,ct){
   viBase=VI_VIDEOS.filter(v=>{
     if(cat!=='All'&&v.cat!==cat) return false;
+    if(dim!=='All'&&v.dim!==dim) return false;
+    if(ct!=='All'&&v.creator_type!==ct) return false;
     if(viSelWeeks.length>0){ const sp=viSelWeeks.reduce((s,i)=>s+v.wSp[i],0); if(sp===0) return false; }
     return true;
   }).map(v=>{
