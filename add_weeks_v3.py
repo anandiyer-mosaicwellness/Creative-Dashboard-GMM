@@ -30,7 +30,7 @@ ASSET_SHEET_ID = '1J6pog_JxT7oJ2jFA4koRw_0eIamcLQ9MYxnFJXrq-J4'
 # Use "gid:1234567" to fetch by sheet gid instead of tab name (when tab name is unknown)
 # Multiple tab names = combine rows from multiple ad accounts for the same week
 NEW_WEEKS = [
-    ("24 August 2026 - 30 August 2026", ["gid:1171624481"]),
+    ("31 August 2026 - 6 September 2026", ["gid:518623768"]),
 ]
 
 def fmt_week_label(date_str):
