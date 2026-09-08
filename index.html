@@ -5138,39 +5138,34 @@ window.bkDraw=bkDraw;
       <span class="vfl">Narrative</span>
       <select id="vi-vf-narr" onchange="viApplyVidFilters()">
         <option value="all">All Narratives</option>
-              <option value="<option value="Absorption">Absorption</option>"><option value="Absorption">Absorption</option></option>
-              <option value="<option value="Before/After">Before/After</option>"><option value="Before/After">Before/After</option></option>
-              <option value="<option value="BeforeAfter">BeforeAfter</option>"><option value="BeforeAfter">BeforeAfter</option></option>
-              <option value="<option value="Creatine for Everyone">Creatine for Everyone</option>"><option value="Creatine for Everyone">Creatine for Everyone</option></option>
-              <option value="<option value="Daily Energy">Daily Energy</option>"><option value="Daily Energy">Daily Energy</option></option>
-              <option value="<option value="Deep Science or Stages Education">Deep Science or Stages Education</option>"><option value="Deep Science or Stages Education">Deep Science or Stages Education</option></option>
-              <option value="<option value="Fake Shilajit">Fake Shilajit</option>"><option value="Fake Shilajit">Fake Shilajit</option></option>
-              <option value="<option value="Fitness">Fitness</option>"><option value="Fitness">Fitness</option></option>
-              <option value="<option value="Genetics">Genetics</option>"><option value="Genetics">Genetics</option></option>
-              <option value="<option value="Low Energy">Low Energy</option>"><option value="Low Energy">Low Energy</option></option>
-              <option value="<option value="Most Tested">Most Tested</option>"><option value="Most Tested">Most Tested</option></option>
-              <option value="<option value="Muscle Recovery">Muscle Recovery</option>"><option value="Muscle Recovery">Muscle Recovery</option></option>
-              <option value="<option value="Myth Buster">Myth Buster</option>"><option value="Myth Buster">Myth Buster</option></option>
-              <option value="<option value="Myth Busting">Myth Busting</option>"><option value="Myth Busting">Myth Busting</option></option>
-              <option value="<option value="Nutrition">Nutrition</option>"><option value="Nutrition">Nutrition</option></option>
-              <option value="<option value="Peer Proof/Confidence">Peer Proof/Confidence</option>"><option value="Peer Proof/Confidence">Peer Proof/Confidence</option></option>
-              <option value="<option value="Problem Based">Problem Based</option>"><option value="Problem Based">Problem Based</option></option>
-              <option value="<option value="Problem Solution">Problem Solution</option>"><option value="Problem Solution">Problem Solution</option></option>
-              <option value="<option value="Problem-Solution">Problem-Solution</option>"><option value="Problem-Solution">Problem-Solution</option></option>
-              <option value="<option value="Product Based">Product Based</option>"><option value="Product Based">Product Based</option></option>
-              <option value="<option value="Product First">Product First</option>"><option value="Product First">Product First</option></option>
-              <option value="<option value="Product first">Product first</option>"><option value="Product first">Product first</option></option>
-              <option value="<option value="Pure & Natural/Ingredients">Pure & Natural/Ingredients</option>"><option value="Pure & Natural/Ingredients">Pure & Natural/Ingredients</option></option>
-              <option value="<option value="Receding Hairline/Bald Spots">Receding Hairline/Bald Spots</option>"><option value="Receding Hairline/Bald Spots">Receding Hairline/Bald Spots</option></option>
-              <option value="<option value="Receeding Hairline">Receeding Hairline</option>"><option value="Receeding Hairline">Receeding Hairline</option></option>
-              <option value="<option value="Results/Assurance">Results/Assurance</option>"><option value="Results/Assurance">Results/Assurance</option></option>
-              <option value="<option value="Results/Assurance/ProductFirst">Results/Assurance/ProductFirst</option>"><option value="Results/Assurance/ProductFirst">Results/Assurance/ProductFirst</option></option>
-              <option value="<option value="Science">Science</option>"><option value="Science">Science</option></option>
-              <option value="<option value="Sleep & Stress">Sleep & Stress</option>"><option value="Sleep & Stress">Sleep & Stress</option></option>
-              <option value="<option value="Stages">Stages</option>"><option value="Stages">Stages</option></option>
-              <option value="<option value="Trust">Trust</option>"><option value="Trust">Trust</option></option>
-              <option value="<option value="Why MM">Why MM</option>"><option value="Why MM">Why MM</option></option>
-              <option value="<option value="Zero Added Sugar">Zero Added Sugar</option>"><option value="Zero Added Sugar">Zero Added Sugar</option></option>
+        <option value="Absorption">Absorption</option>
+        <option value="Before/After">Before/After</option>
+        <option value="Creatine for Everyone">Creatine for Everyone</option>
+        <option value="Daily Energy">Daily Energy</option>
+        <option value="Deep Science or Stages Education">Deep Science or Stages Education</option>
+        <option value="Fake Shilajit">Fake Shilajit</option>
+        <option value="Fitness">Fitness</option>
+        <option value="Genetics">Genetics</option>
+        <option value="Low Energy">Low Energy</option>
+        <option value="Most Tested">Most Tested</option>
+        <option value="Muscle Recovery">Muscle Recovery</option>
+        <option value="Myth Buster">Myth Buster</option>
+        <option value="Nutrition">Nutrition</option>
+        <option value="Peer Proof/Confidence">Peer Proof/Confidence</option>
+        <option value="Problem Based">Problem Based</option>
+        <option value="Problem Solution">Problem Solution</option>
+        <option value="Product Based">Product Based</option>
+        <option value="Product First">Product First</option>
+        <option value="Pure &amp; Natural/Ingredients">Pure &amp; Natural/Ingredients</option>
+        <option value="Receding Hairline/Bald Spots">Receding Hairline/Bald Spots</option>
+        <option value="Results/Assurance">Results/Assurance</option>
+        <option value="Results/Assurance/ProductFirst">Results/Assurance/ProductFirst</option>
+        <option value="Science">Science</option>
+        <option value="Sleep &amp; Stress">Sleep &amp; Stress</option>
+        <option value="Stages">Stages</option>
+        <option value="Trust">Trust</option>
+        <option value="Why MM">Why MM</option>
+        <option value="Zero Added Sugar">Zero Added Sugar</option>
       </select>
 
       <!-- Spend filter -->
@@ -5283,6 +5278,16 @@ document.addEventListener('click',e=>{
   if(wp&&!wp.contains(e.target)) document.getElementById('vi-wp-pop').classList.remove('open');
 });
 
+// Canonical narrative map — merges near-duplicates to one name
+const VI_NARR_NORM = {
+  'BeforeAfter':              'Before/After',
+  'Myth Busting':             'Myth Buster',
+  'Problem-Solution':         'Problem Solution',
+  'Product first':            'Product First',
+  'Receeding Hairline':       'Receding Hairline/Bald Spots',
+};
+function vi_normNarr(n){ return VI_NARR_NORM[n] || n || ''; }
+
 function viInit(){
   if(viInitDone) return; viInitDone=true;
   VI_WEEK_LABELS = D.meta.week_labels;
@@ -5299,7 +5304,7 @@ function viInit(){
     (v.combos||[]).forEach(c=>{ c.w.forEach((s,i)=>{ if(i<N){ wSp[i]+=s; wCv[i]+=c.wc[i]||0; } }); });
     VI_VIDEOS.push({
       id:v.id, bkt, cat:vcat, dim:meta.dim||'', creator:meta.cr||'',
-      creator_type:meta.ct||'', narr:meta.na||'', total:v.total,
+      creator_type:meta.ct||'', narr:vi_normNarr(meta.na||''), total:v.total,
       total_conv:wCv.reduce((a,b)=>a+b,0), wSp, wCv,
     });
   });
