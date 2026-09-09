@@ -5130,10 +5130,7 @@ window.bkDraw=bkDraw;
     <div class="vi-vf">
       <span class="vfl">Product</span>
       <select id="vi-vf-prod" onchange="viApplyVidFilters()">
-        <option value="all">All Products</option>
-        <option value="Hair">Hair</option>
-        <option value="Beard">Beard</option>
-        <option value="Nutrition">Nutrition</option>
+        <option value="All">All Products</option>
       </select>
 
       <span class="vfl">Bucket</span>
@@ -5328,15 +5325,19 @@ function viInit(){
     const meta = VI_META[v.id]||{};
     const bkt  = vi_getBkt(VI_DUR[v.id]);
     const cat  = vi_getCat(v); const vcat = VI_CATS.includes(cat)?cat:'Other';
+    const prod = getVideoProduct(v);
     const wSp=[],wCv=[];
     for(let i=0;i<N;i++){ wSp.push(0); wCv.push(0); }
     (v.combos||[]).forEach(c=>{ c.w.forEach((s,i)=>{ if(i<N){ wSp[i]+=s; wCv[i]+=c.wc[i]||0; } }); });
     VI_VIDEOS.push({
-      id:v.id, bkt, cat:vcat, dim:meta.dim||'', creator:meta.cr||'',
+      id:v.id, bkt, cat:vcat, prod, dim:meta.dim||'', creator:meta.cr||'',
       creator_type:meta.ct||'', narr:vi_normNarr(meta.na||''), total:v.total,
       total_conv:wCv.reduce((a,b)=>a+b,0), wSp, wCv,
     });
   });
+  // Populate product dropdown dynamically (same list as tab1)
+  const prodList=buildProductList();
+  document.getElementById('vi-vf-prod').innerHTML=prodList.map(p=>`<option value="${p}">${p==='All'?'All Products':p}</option>`).join('');
   viRender();
 }
 
@@ -5491,7 +5492,7 @@ function viApplyVidFilters(){
   const nF=document.getElementById('vi-vf-narr').value;
   const q =document.getElementById('vi-vsearch').value.toLowerCase().trim();
   viFiltered=viBase.filter(v=>{
-    if(pF!=='all'&&v.cat!==pF) return false;
+    if(pF!=='All'&&v.prod!==pF) return false;
     if(bF!=='all'&&v.bkt!==bF) return false;
     if(dF!=='all'&&v.dim!==dF) return false;
     if(cF!=='all'&&v.creator_type!==cF) return false;
@@ -5539,15 +5540,16 @@ function viChangePage(dir){ viPage+=dir; viRenderVids(); }
 function viExportCSV(){
   if(!viFiltered.length){ alert('No data to export.'); return; }
   const esc=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
-  const rows=[['Video ID','YouTube URL','Bucket','Dimension','Category','Creator','Creator Type','Narrative','Spend (INR)','Conversions','CAC (INR)']];
+  const rows=[['Video ID','YouTube URL','Product','Category','Bucket','Dimension','Creator','Creator Type','Narrative','Spend (INR)','Conversions','CAC (INR)']];
   viFiltered.forEach(v=>{
     const cac=v._cv>0?(v._sp/v._cv):0;
     rows.push([
       v.id,
       'https://youtube.com/watch?v='+v.id,
+      v.prod||'',
+      v.cat,
       v.bkt,
       v.dim,
-      v.cat,
       v.creator||'',
       v.creator_type||'',
       v.narr||'',
