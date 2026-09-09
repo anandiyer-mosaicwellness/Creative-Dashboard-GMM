@@ -4954,8 +4954,6 @@ window.bkDraw=bkDraw;
 #tab9 .vi-bar-track{position:relative;height:20px;background:var(--bg);border-radius:4px;overflow:visible}
 #tab9 .vi-bar-fill{height:100%;border-radius:4px;transition:width .4s ease;position:relative}
 #tab9 .vi-bar-fill2{position:absolute;top:0;height:100%;border-radius:4px;opacity:.38;transition:width .4s ease}
-#tab9 .vi-bar-fill[data-tip]:hover::after,#tab9 .vi-bar-fill2[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1a202c;color:#fff;padding:4px 9px;border-radius:5px;font-size:12px;font-weight:600;white-space:nowrap;pointer-events:none;z-index:999}
-#tab9 .vi-bar-fill2[data-tip]:hover::after{bottom:calc(100% + 6px)}
 #tab9 .vi-bar-val{font-size:11px;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
 #tab9 .vi-tbl-wrap{overflow-x:auto;background:var(--white);border:1px solid var(--border);border-radius:10px;margin-bottom:14px}
 #tab9 .vi-tbl{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
@@ -5423,8 +5421,10 @@ function viRender(){
     const{spend,conv}=data[b]; const pct=maxSp>0?spend/maxSp*100:0; const col=VI_BKT_COLORS[b]; const cac=conv>0?spend/conv:0;
     const curLabel=cmp?(viSelWeeks.length===1?VI_WEEK_LABELS[viSelWeeks[0]]:`${viSelWeeks.length} wks`):'Current';
     const prevLabel=prev?(viSelWeeks.length===1&&prevWks.length?VI_WEEK_LABELS[prevWks[0]]:'Prev period'):'';
-    const pBar=prev?`<div class="vi-bar-fill2" data-tip="${prevLabel}: ${vi_inr(prev[b].spend)}" style="left:0;width:${(prev[b].spend/maxSp*100).toFixed(1)}%;background:${col};cursor:default"></div>`:'';
-    return `<div class="vi-bar-row"><div class="vi-bar-lbl">${b}</div><div class="vi-bar-track">${pBar}<div class="vi-bar-fill" data-tip="${cmp?curLabel+': ':''}${vi_inr(spend)}" style="width:${pct.toFixed(1)}%;background:${col};cursor:default"></div></div><div class="vi-bar-val">${vi_inrS(spend)}${conv>0?` · <span class="cs ${vi_cacCls(cac)}">${vi_inrS(cac)}</span>`:''}</div></div>`;
+    const pTip=prev?`${prevLabel}: ${vi_inr(prev[b].spend)}`:'';
+    const cTip=`${cmp?curLabel+': ':''}${vi_inr(spend)}`;
+    const pBar=prev?`<div class="vi-bar-fill2" style="left:0;width:${(prev[b].spend/maxSp*100).toFixed(1)}%;background:${col};cursor:default" onmouseenter="viBarTip(event,'${pTip}')" onmousemove="viBarTip(event,'${pTip}')" onmouseleave="viBarTipHide()"></div>`:'';
+    return `<div class="vi-bar-row"><div class="vi-bar-lbl">${b}</div><div class="vi-bar-track">${pBar}<div class="vi-bar-fill" style="width:${pct.toFixed(1)}%;background:${col};cursor:default" onmouseenter="viBarTip(event,'${cTip}')" onmousemove="viBarTip(event,'${cTip}')" onmouseleave="viBarTipHide()"></div></div><div class="vi-bar-val">${vi_inrS(spend)}${conv>0?` · <span class="cs ${vi_cacCls(cac)}">${vi_inrS(cac)}</span>`:''}</div></div>`;
   }).join('');
 
   // Table
@@ -5579,6 +5579,10 @@ window.viClearSpend=viClearSpend;
 window.viChangePage=viChangePage;
 window.viToggleWkPop=viToggleWkPop;
 window.viToggleCmp=viToggleCmp;
+function viBarTip(e,txt){ const t=document.getElementById('vtip'); t.textContent=txt; t.style.display='block'; t.style.left=(e.clientX+12)+'px'; t.style.top=(e.clientY-32)+'px'; }
+function viBarTipHide(){ document.getElementById('vtip').style.display='none'; }
+window.viBarTip=viBarTip;
+window.viBarTipHide=viBarTipHide;
 window.viExportCSV=viExportCSV;
 window.viApplyWkPop=viApplyWkPop;
 window.viWkSelectAll=viWkSelectAll;
