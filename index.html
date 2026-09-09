@@ -5419,8 +5419,10 @@ function viRender(){
   const maxSp=Math.max(...VI_BUCKETS.map(b=>Math.max(data[b].spend,prev?prev[b].spend:0)));
   document.getElementById('vi-bars').innerHTML=VI_BUCKETS.map(b=>{
     const{spend,conv}=data[b]; const pct=maxSp>0?spend/maxSp*100:0; const col=VI_BKT_COLORS[b]; const cac=conv>0?spend/conv:0;
-    const pBar=prev?`<div class="vi-bar-fill2" style="left:0;width:${(prev[b].spend/maxSp*100).toFixed(1)}%;background:${col}"></div>`:'';
-    return `<div class="vi-bar-row"><div class="vi-bar-lbl">${b}</div><div class="vi-bar-track">${pBar}<div class="vi-bar-fill" style="width:${pct.toFixed(1)}%;background:${col}"></div></div><div class="vi-bar-val">${vi_inrS(spend)}${conv>0?` · <span class="cs ${vi_cacCls(cac)}">${vi_inrS(cac)}</span>`:''}</div></div>`;
+    const curLabel=cmp?(viSelWeeks.length===1?VI_WEEK_LABELS[viSelWeeks[0]]:`${viSelWeeks.length} wks`):'Current';
+    const prevLabel=prev?(viSelWeeks.length===1&&prevWks.length?VI_WEEK_LABELS[prevWks[0]]:'Prev period'):'';
+    const pBar=prev?`<div class="vi-bar-fill2" style="left:0;width:${(prev[b].spend/maxSp*100).toFixed(1)}%;background:${col};cursor:default" title="${prevLabel}: ${vi_inr(prev[b].spend)}"></div>`:'';
+    return `<div class="vi-bar-row"><div class="vi-bar-lbl">${b}</div><div class="vi-bar-track">${pBar}<div class="vi-bar-fill" style="width:${pct.toFixed(1)}%;background:${col};cursor:default" title="${cmp?curLabel+': ':''}${vi_inr(spend)}"></div></div><div class="vi-bar-val">${vi_inrS(spend)}${conv>0?` · <span class="cs ${vi_cacCls(cac)}">${vi_inrS(cac)}</span>`:''}</div></div>`;
   }).join('');
 
   // Table
