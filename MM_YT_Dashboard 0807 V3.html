@@ -4938,9 +4938,9 @@ window.bkDraw=bkDraw;
 #tab9 .vi-ctrl .flabel{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
 #tab9 .vi-ctrl select{padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--navy);font-size:14px;cursor:pointer}
 #tab9 .vi-div{width:1px;height:26px;background:var(--border)}
-#tab9 .vi-cmp-toggle{display:flex;align-items:center;gap:7px;font-size:14px;cursor:pointer;user-select:none}
-#tab9 .vi-cmp-toggle input{width:34px;height:18px;cursor:pointer}
-#tab9 .vi-cmp-badge{background:#eff6ff;color:#1d4ed8;border:1px solid #1d4ed8;border-radius:4px;padding:1px 7px;font-size:11px;font-weight:600}
+#tab9 .vi-cmp-btn{padding:6px 16px;border:1.5px solid var(--border);border-radius:20px;background:var(--white);color:var(--navy);font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;display:flex;align-items:center;gap:6px;transition:all .15s}
+#tab9 .vi-cmp-btn:hover{border-color:#3b82f6;color:#3b82f6}
+#tab9 .vi-cmp-btn.on{border-color:#3b82f6;background:#eff6ff;color:#1d4ed8}
 #tab9 .vi-kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px;margin-bottom:14px}
 #tab9 .vi-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
 #tab9 .vi-card-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
@@ -5094,10 +5094,7 @@ window.bkDraw=bkDraw;
       </select>
     </div>
     <div class="vi-div"></div>
-    <label class="vi-cmp-toggle" id="vi-cmp-wrap">
-      <input type="checkbox" id="vi-cmp" onchange="viRender()">
-      vs prev week <span class="vi-cmp-badge">Δ</span>
-    </label>
+    <button class="vi-cmp-btn" id="vi-cmp-wrap" onclick="viToggleCmp()">⇌ Compare</button>
   </div>
 
   <!-- KPI cards -->
@@ -5266,6 +5263,11 @@ let viSpActive=false, viSpOp='gt', viSpAmt=null;
 
 // ── Week picker ──
 function viToggleWkPop(){ document.getElementById('vi-wp-pop').classList.toggle('open'); }
+function viToggleCmp(){
+  viCmp=!viCmp;
+  document.getElementById('vi-cmp-wrap').classList.toggle('on',viCmp);
+  viRender();
+}
 function viWkSelectAll(){ document.querySelectorAll('#vi-wp-list input').forEach(c=>c.checked=true); }
 function viWkClear(){ document.querySelectorAll('#vi-wp-list input').forEach(c=>c.checked=false); }
 function viWkLast(n){
@@ -5284,11 +5286,11 @@ function viApplyWkPop(){
   else btn.textContent=viSelWeeks.length+' weeks selected ▾';
   btn.classList.toggle('on', viSelWeeks.length>0);
   // Compare only valid for exactly 1 week with a predecessor
-  const cmpEl=document.getElementById('vi-cmp');
   const cmpOk=(viSelWeeks.length===1&&viSelWeeks[0]>=1);
-  document.getElementById('vi-cmp-wrap').style.opacity=cmpOk?'1':'0.4';
-  document.getElementById('vi-cmp-wrap').style.pointerEvents=cmpOk?'':'none';
-  if(!cmpOk) cmpEl.checked=false;
+  const cmpBtn=document.getElementById('vi-cmp-wrap');
+  cmpBtn.style.opacity=cmpOk?'1':'0.4';
+  cmpBtn.style.pointerEvents=cmpOk?'':'none';
+  if(!cmpOk){ viCmp=false; cmpBtn.classList.remove('on'); }
   document.getElementById('vi-wp-pop').classList.remove('open');
   viRender();
 }
@@ -5358,8 +5360,7 @@ function viRender(){
   const cat=document.getElementById('vi-cat').value;
   const dim=document.getElementById('vi-dim').value;
   const ct =document.getElementById('vi-ct').value;
-  const cmp=document.getElementById('vi-cmp').checked&&(viSelWeeks.length===1&&viSelWeeks[0]>=1);
-  viCmp=cmp;
+  const cmp=viCmp&&(viSelWeeks.length===1&&viSelWeeks[0]>=1);
   const prevWks=cmp?[viSelWeeks[0]-1]:[];
 
   const data=viComputeBkt(viSelWeeks,cat,dim,ct);
@@ -5530,6 +5531,7 @@ window.viApplySpend=viApplySpend;
 window.viClearSpend=viClearSpend;
 window.viChangePage=viChangePage;
 window.viToggleWkPop=viToggleWkPop;
+window.viToggleCmp=viToggleCmp;
 window.viApplyWkPop=viApplyWkPop;
 window.viWkSelectAll=viWkSelectAll;
 window.viWkClear=viWkClear;
