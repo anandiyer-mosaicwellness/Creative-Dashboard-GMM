@@ -5221,9 +5221,10 @@ window.bkDraw=bkDraw;
     </div>
     <div class="vi-pg">
       <span style="font-size:11px;color:var(--muted)" id="vi-pg-info"></span>
-      <div style="display:flex;gap:5px">
+      <div style="display:flex;gap:8px;align-items:center">
         <button class="vi-pg-btn" id="vi-pg-prev" onclick="viChangePage(-1)">← Prev</button>
         <button class="vi-pg-btn" id="vi-pg-next" onclick="viChangePage(1)">Next →</button>
+        <button class="vi-pg-btn" id="vi-export-btn" onclick="viExportCSV()" style="background:#1F3864;color:#fff;border-color:#1F3864;font-weight:700;padding:4px 12px">⬇ Export CSV</button>
       </div>
     </div>
   </div>
@@ -5524,6 +5525,35 @@ function viRenderVids(){
 }
 
 function viChangePage(dir){ viPage+=dir; viRenderVids(); }
+
+function viExportCSV(){
+  if(!viFiltered.length){ alert('No data to export.'); return; }
+  const esc=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
+  const rows=[['Video ID','YouTube URL','Bucket','Dimension','Category','Creator','Creator Type','Narrative','Spend (INR)','Conversions','CAC (INR)']];
+  viFiltered.forEach(v=>{
+    const cac=v._cv>0?(v._sp/v._cv):0;
+    rows.push([
+      v.id,
+      'https://youtube.com/watch?v='+v.id,
+      v.bkt,
+      v.dim,
+      v.cat,
+      v.creator||'',
+      v.creator_type||'',
+      v.narr||'',
+      Math.round(v._sp),
+      Math.round(v._cv),
+      cac>0?Math.round(cac):''
+    ]);
+  });
+  const csv=rows.map(r=>r.map(esc).join(',')).join('\r\n');
+  const blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='video_intel_export.csv'; a.click();
+  URL.revokeObjectURL(url);
+}
+
 window.viInit=viInit;
 window.viRender=viRender;
 window.viApplyVidFilters=viApplyVidFilters;
@@ -5533,6 +5563,7 @@ window.viClearSpend=viClearSpend;
 window.viChangePage=viChangePage;
 window.viToggleWkPop=viToggleWkPop;
 window.viToggleCmp=viToggleCmp;
+window.viExportCSV=viExportCSV;
 window.viApplyWkPop=viApplyWkPop;
 window.viWkSelectAll=viWkSelectAll;
 window.viWkClear=viWkClear;
