@@ -5077,6 +5077,7 @@ window.bkDraw=bkDraw;
         </div>
       </div>
     </div>
+    <button class="vi-cmp-btn" id="vi-cmp-wrap" onclick="viToggleCmp()">⇌ Compare</button>
     <div class="vi-div"></div>
     <div class="fg"><span class="flabel">Dimension</span>
       <select id="vi-dim" onchange="viRender()">
@@ -5093,8 +5094,6 @@ window.bkDraw=bkDraw;
         <option value="Meta Creator">Meta Creator</option>
       </select>
     </div>
-    <div class="vi-div"></div>
-    <button class="vi-cmp-btn" id="vi-cmp-wrap" onclick="viToggleCmp()">⇌ Compare</button>
   </div>
 
   <!-- KPI cards -->
@@ -5285,8 +5284,8 @@ function viApplyWkPop(){
   else if(viSelWeeks.length===1) btn.textContent=VI_WEEK_LABELS[viSelWeeks[0]]+' ▾';
   else btn.textContent=viSelWeeks.length+' weeks selected ▾';
   btn.classList.toggle('on', viSelWeeks.length>0);
-  // Compare only valid for exactly 1 week with a predecessor
-  const cmpOk=(viSelWeeks.length===1&&viSelWeeks[0]>=1);
+  // Compare enabled whenever specific weeks are selected (not All Time)
+  const cmpOk=viSelWeeks.length>0;
   const cmpBtn=document.getElementById('vi-cmp-wrap');
   cmpBtn.style.opacity=cmpOk?'1':'0.4';
   cmpBtn.style.pointerEvents=cmpOk?'':'none';
@@ -5360,8 +5359,10 @@ function viRender(){
   const cat=document.getElementById('vi-cat').value;
   const dim=document.getElementById('vi-dim').value;
   const ct =document.getElementById('vi-ct').value;
-  const cmp=viCmp&&(viSelWeeks.length===1&&viSelWeeks[0]>=1);
-  const prevWks=cmp?[viSelWeeks[0]-1]:[];
+  const cmp=viCmp&&viSelWeeks.length>0;
+  // For multi-week: shift selected indices back by the number of selected weeks
+  const shift=viSelWeeks.length;
+  const prevWks=cmp?viSelWeeks.map(i=>i-shift).filter(i=>i>=0):[];
 
   const data=viComputeBkt(viSelWeeks,cat,dim,ct);
   const prev=cmp?viComputeBkt(prevWks,cat,dim,ct):null;
@@ -5440,7 +5441,7 @@ function viRebuildBase(cat,dim,ct){
     let sp,cv,pSp=null;
     if(viSelWeeks.length===0){ sp=v.total; cv=v.total_conv; }
     else{ sp=viSelWeeks.reduce((s,i)=>s+v.wSp[i],0); cv=viSelWeeks.reduce((s,i)=>s+v.wCv[i],0); }
-    if(viCmp&&viSelWeeks.length===1&&viSelWeeks[0]>=1) pSp=v.wSp[viSelWeeks[0]-1];
+    if(viCmp&&viSelWeeks.length>0){ const sh=viSelWeeks.length; const pWks=viSelWeeks.map(i=>i-sh).filter(i=>i>=0); pSp=pWks.length>0?pWks.reduce((s,i)=>s+(v.wSp[i]||0),0):null; }
     return {...v,_sp:sp,_cv:cv,_pSp:pSp};
   }).sort((a,b)=>b._sp-a._sp);
 }
