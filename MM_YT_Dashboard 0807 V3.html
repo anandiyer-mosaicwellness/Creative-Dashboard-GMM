@@ -5128,6 +5128,14 @@ window.bkDraw=bkDraw;
 
     <!-- Video-list filters -->
     <div class="vi-vf">
+      <span class="vfl">Product</span>
+      <select id="vi-vf-prod" onchange="viApplyVidFilters()">
+        <option value="all">All Products</option>
+        <option value="Hair">Hair</option>
+        <option value="Beard">Beard</option>
+        <option value="Nutrition">Nutrition</option>
+      </select>
+
       <span class="vfl">Bucket</span>
       <select id="vi-vf-bkt" onchange="viApplyVidFilters()">
         <option value="all">All Buckets</option>
@@ -5476,12 +5484,14 @@ function viPassSpend(s){
 }
 
 function viApplyVidFilters(){
+  const pF=document.getElementById('vi-vf-prod').value;
   const bF=document.getElementById('vi-vf-bkt').value;
   const dF=document.getElementById('vi-vf-dim').value;
   const cF=document.getElementById('vi-vf-ct').value;
   const nF=document.getElementById('vi-vf-narr').value;
   const q =document.getElementById('vi-vsearch').value.toLowerCase().trim();
   viFiltered=viBase.filter(v=>{
+    if(pF!=='all'&&v.cat!==pF) return false;
     if(bF!=='all'&&v.bkt!==bF) return false;
     if(dF!=='all'&&v.dim!==dF) return false;
     if(cF!=='all'&&v.creator_type!==cF) return false;
