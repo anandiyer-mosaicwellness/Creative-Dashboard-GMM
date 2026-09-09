@@ -5123,6 +5123,7 @@ window.bkDraw=bkDraw;
     <div class="vi-vid-top">
       <h3>Video List</h3>
       <span class="vi-vid-count" id="vi-vid-count"></span>
+      <button onclick="viExportCSV()" style="margin-left:auto;padding:5px 14px;background:#1F3864;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">⬇ Export CSV</button>
     </div>
 
     <!-- Video-list filters -->
@@ -5221,10 +5222,9 @@ window.bkDraw=bkDraw;
     </div>
     <div class="vi-pg">
       <span style="font-size:11px;color:var(--muted)" id="vi-pg-info"></span>
-      <div style="display:flex;gap:8px;align-items:center">
+      <div style="display:flex;gap:5px">
         <button class="vi-pg-btn" id="vi-pg-prev" onclick="viChangePage(-1)">← Prev</button>
         <button class="vi-pg-btn" id="vi-pg-next" onclick="viChangePage(1)">Next →</button>
-        <button class="vi-pg-btn" id="vi-export-btn" onclick="viExportCSV()" style="background:#1F3864;color:#fff;border-color:#1F3864;font-weight:700;padding:4px 12px">⬇ Export CSV</button>
       </div>
     </div>
   </div>
